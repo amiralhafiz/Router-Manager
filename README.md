@@ -21,16 +21,25 @@ Use the provided Gradle wrapper scripts to build or install the app. On Unix sys
 
 ## Versioning
 
-The build script derives version information from Git. It runs
-`git rev-list --count HEAD` to obtain a `commitCount` and
-`git rev-parse --short HEAD` for a short commit hash.
+The build script derives version information from Git. It uses
+`git rev-list --count HEAD` for the commit count and
+`git rev-parse --short HEAD` to obtain the short commit hash. The commit
+count becomes the `versionCode` and is split into `major`, `minor` and
+`patch` values.
 
-The `commitCount` becomes the `versionCode` and is also split into three parts:
-`major`, `minor` and `patch`. `patch` cycles from `01` through `10`. When the
-patch number rolls over to `01`, `minor` is incremented. If `minor` would reach
-`10` it resets to `00` and `major` is incremented. The resulting
-`versionName` is formatted as
-`v${major}.${minor.padStart(2,'0')}.${patch.padStart(2,'0')}-${gitSha}`.
+Version names follow the `v<major>.<minor>.<patch>-<git hash>` scheme.
+`patch` increases with each commit and cycles from `01` through `10`. When it
+wraps back to `01`, `minor` increments. If `minor` reaches `10` it resets to
+`00` and `major` increments.
+
+Example sequence:
+
+```
+v0.00.01-<sha>
+...
+v0.00.10-<sha>
+v0.01.01-<sha>
+```
 
 ## Running Instrumentation Tests
 
