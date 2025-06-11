@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".RouterManagerApplication"
         android:allowBackup="true"
         android:label="RouterManager"
         android:supportsRtl="true"
