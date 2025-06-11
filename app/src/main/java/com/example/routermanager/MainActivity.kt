@@ -100,6 +100,20 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 return true
             }
+            override fun onJsConfirm(
+                view: WebView?,
+                url: String?,
+                message: String?,
+                result: JsResult?,
+            ): Boolean {
+                AlertDialog.Builder(this@MainActivity)
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> result?.confirm() }
+                    .setNegativeButton(android.R.string.cancel) { _, _ -> result?.cancel() }
+                    .setCancelable(false)
+                    .show()
+                return true
+            }
         }
         webView.settings.apply {
             javaScriptEnabled = true
