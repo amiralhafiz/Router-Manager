@@ -24,6 +24,7 @@ private const val KEY_SSL_TRUSTED = "sslTrusted"
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private var sslTrusted: Boolean = false
+    private val pendingSslHandlers = mutableListOf<SslErrorHandler>()
 
     private inner class RouterWebViewClient : WebViewClient() {
         @SuppressLint("WebViewClientOnReceivedSslError")
@@ -37,16 +38,26 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 
-            AlertDialog.Builder(this@MainActivity)
-                .setTitle("SSL Certificate Error")
-                .setMessage("The router presented an untrusted certificate. Continue anyway?")
-                .setPositiveButton("Continue") { _, _ ->
-                    sslTrusted = true
-                    handler?.proceed()
-                }
-                .setNegativeButton("Cancel") { _, _ -> handler?.cancel() }
-                .setCancelable(false)
-                .show()
+            handler?.let { pendingSslHandlers.add(it) }
+
+            if (pendingSslHandlers.size == 1) {
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("SSL Certificate Error")
+                    .setMessage(
+                        "The router presented an untrusted certificate. Continue anyway?"
+                    )
+                    .setPositiveButton("Continue") { _, _ ->
+                        sslTrusted = true
+                        pendingSslHandlers.forEach { it.proceed() }
+                        pendingSslHandlers.clear()
+                    }
+                    .setNegativeButton("Cancel") { _, _ ->
+                        pendingSslHandlers.forEach { it.cancel() }
+                        pendingSslHandlers.clear()
+                    }
+                    .setCancelable(false)
+                    .show()
+            }
         }
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
