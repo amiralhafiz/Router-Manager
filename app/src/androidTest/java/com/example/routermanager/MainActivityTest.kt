@@ -30,7 +30,10 @@ class MainActivityTest {
             if (noViewFoundException != null) throw noViewFoundException
             val webView = view as WebView
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-            assertEquals("https://10.80.80.1/", webView.url)
+            val context = InstrumentationRegistry.getInstrumentation().targetContext
+            val expectedUrl = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+                .getString("routerUrl", "https://10.80.80.1/")
+            assertEquals(expectedUrl, webView.url)
         }
     }
 }
