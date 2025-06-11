@@ -9,6 +9,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
 import android.webkit.JsResult
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceError
 import android.webkit.WebSettings
 import android.webkit.CookieManager
 import android.os.Build
@@ -77,6 +79,45 @@ class MainActivity : AppCompatActivity() {
             super.onPageFinished(view, url)
             progressBar.visibility = View.GONE
         }
+
+        override fun onReceivedError(
+            view: WebView,
+            request: WebResourceRequest,
+            error: WebResourceError
+        ) {
+            super.onReceivedError(view, request, error)
+            if (request.isForMainFrame) {
+                progressBar.visibility = View.GONE
+                showLoadError(error.description)
+            }
+        }
+
+        @Suppress("DEPRECATION")
+        override fun onReceivedError(
+            view: WebView?,
+            errorCode: Int,
+            description: String?,
+            failingUrl: String?
+        ) {
+            super.onReceivedError(view, errorCode, description, failingUrl)
+            val currentUrl = view?.url
+            if (currentUrl != null && currentUrl == failingUrl) {
+                progressBar.visibility = View.GONE
+                showLoadError(description)
+            }
+        }
+    }
+
+    private fun showLoadError(description: CharSequence?) {
+        AlertDialog.Builder(this)
+            .setTitle("Page Load Error")
+            .setMessage("The page could not be loaded:\n$description")
+            .setPositiveButton("Back to Setup") { _, _ ->
+                startActivity(Intent(this, SetupActivity::class.java))
+                finish()
+            }
+            .setCancelable(false)
+            .show()
     }
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
