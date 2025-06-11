@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/action_refresh"
             app:srcCompat="@drawable/ic_refresh" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,13 +49,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/action_speed_test"
             app:srcCompat="@android:drawable/ic_menu_manage" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/offButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Off" />
+            android:contentDescription="@string/action_power_off"
+            app:icon="@drawable/ic_power" />
 
     </LinearLayout>
 

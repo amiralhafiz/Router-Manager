@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RouterManager</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_speed_test">Speed Test</string>
+    <string name="action_back">Back</string>
+    <string name="action_power_off">Power Off</string>
 </resources>
