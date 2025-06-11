@@ -7,7 +7,6 @@
         android:allowBackup="true"
         android:label="RouterManager"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.RouterManager">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
