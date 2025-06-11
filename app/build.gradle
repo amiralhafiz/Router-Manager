@@ -12,9 +12,9 @@ android {
         def gitSha = "git rev-parse --short HEAD".execute([], rootDir).text.trim()
 
         def index = commitCount - 1
-        def major = (int) (index / 100)
-        def minor = (int) ((index / 10) % 10)
-        def patch = (int) (index % 10) + 1
+        def major = index.intdiv(100)
+        def minor = index.intdiv(10) % 10
+        def patch = index % 10 + 1
 
         applicationId "com.example.routermanager"
         minSdk 21
