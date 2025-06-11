@@ -18,6 +18,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
 import android.content.Intent
+import com.example.routermanager.EXTRA_FORCE_SETUP
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             super.onReceivedError(view, request, error)
             if (request.isForMainFrame) {
                 progressBar.visibility = View.GONE
-                showLoadError(error.description)
+                showLoadError()
             }
         }
 
@@ -103,17 +104,19 @@ class MainActivity : AppCompatActivity() {
             val currentUrl = view?.url
             if (currentUrl != null && currentUrl == failingUrl) {
                 progressBar.visibility = View.GONE
-                showLoadError(description)
+                showLoadError()
             }
         }
     }
 
-    private fun showLoadError(description: CharSequence?) {
+    private fun showLoadError() {
         AlertDialog.Builder(this)
             .setTitle("Page Load Error")
-            .setMessage("The page could not be loaded:\n$description")
+            .setMessage("Unable to load the router page. Please check the address and try again.")
             .setPositiveButton("Back to Setup") { _, _ ->
-                startActivity(Intent(this, SetupActivity::class.java))
+                val intent = Intent(this, SetupActivity::class.java)
+                intent.putExtra(EXTRA_FORCE_SETUP, true)
+                startActivity(intent)
                 finish()
             }
             .setCancelable(false)
@@ -132,7 +135,6 @@ class MainActivity : AppCompatActivity() {
         val webView: WebView = findViewById(R.id.routerWebView)
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         val speedTestButton: FloatingActionButton = findViewById(R.id.speedTestButton)
-        val homeButton: FloatingActionButton = findViewById(R.id.homeButton)
         val offButton: ExtendedFloatingActionButton = findViewById(R.id.offButton)
         progressBar = findViewById(R.id.loadingProgress)
         webView.webViewClient = RouterWebViewClient()
@@ -186,9 +188,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SpeedTestActivity::class.java))
         }
 
-        homeButton.setOnClickListener {
-            webView.loadUrl(routerUrl)
-        }
 
         offButton.setOnClickListener {
             prefs.edit().clear().apply()

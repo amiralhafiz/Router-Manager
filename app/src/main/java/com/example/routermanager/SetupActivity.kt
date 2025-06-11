@@ -7,19 +7,22 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
+const val EXTRA_FORCE_SETUP = "forceSetup"
 private const val KEY_ROUTER_URL = "routerUrl"
 
 class SetupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val forceSetup = intent.getBooleanExtra(EXTRA_FORCE_SETUP, false)
         val prefs = getSharedPreferences("settings", MODE_PRIVATE)
-        if (prefs.contains(KEY_ROUTER_URL)) {
+        if (!forceSetup && prefs.contains(KEY_ROUTER_URL)) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
         }
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
+        urlField.setText(prefs.getString(KEY_ROUTER_URL, ""))
         val accessButton: Button = findViewById(R.id.accessButton)
 
         urlField.setOnEditorActionListener { _, actionId, _ ->
