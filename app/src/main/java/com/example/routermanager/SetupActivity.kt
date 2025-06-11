@@ -2,8 +2,12 @@ package com.example.routermanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.net.wifi.WifiManager
+import android.text.format.Formatter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -22,8 +26,24 @@ class SetupActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
+        val progress: ProgressBar = findViewById(R.id.setupProgress)
         urlField.setText(prefs.getString(PrefsKeys.KEY_ROUTER_URL, ""))
         val accessButton: FloatingActionButton = findViewById(R.id.accessButton)
+
+        urlField.isEnabled = false
+        progress.visibility = View.VISIBLE
+        Thread {
+            val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
+            val address = wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let {
+                @Suppress("DEPRECATION")
+                Formatter.formatIpAddress(it)
+            }
+            runOnUiThread {
+                address?.let { urlField.setText("https://$it/") }
+                progress.visibility = View.GONE
+                urlField.isEnabled = true
+            }
+        }.start()
 
         urlField.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
