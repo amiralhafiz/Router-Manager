@@ -14,6 +14,8 @@ import android.widget.ProgressBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
+private const val ROUTER_URL = "https://10.80.80.1/"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         webView.settings.javaScriptEnabled = true
-        webView.loadUrl("https://10.80.80.1/")
+        webView.loadUrl(ROUTER_URL)
         refreshButton.setOnClickListener { webView.reload() }
     }
 }
