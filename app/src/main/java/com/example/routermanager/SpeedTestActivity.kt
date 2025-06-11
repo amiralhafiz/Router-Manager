@@ -1,5 +1,6 @@
 package com.example.routermanager
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -8,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.webkit.WebSettings
 import android.webkit.CookieManager
+import androidx.core.content.edit
 
 class SpeedTestActivity : AppCompatActivity() {
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speed_test)
@@ -34,7 +37,7 @@ class SpeedTestActivity : AppCompatActivity() {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
         }
         offButton.setOnClickListener {
-            getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply()
+            getSharedPreferences("settings", MODE_PRIVATE).edit { clear() }
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }

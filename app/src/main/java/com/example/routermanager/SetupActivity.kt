@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 
 const val EXTRA_FORCE_SETUP = "forceSetup"
 private const val KEY_ROUTER_URL = "routerUrl"
@@ -36,13 +37,13 @@ class SetupActivity : AppCompatActivity() {
 
         accessButton.setOnClickListener {
             val url = urlField.text.toString().trim()
-            val editor = prefs.edit()
-            if (url.isBlank()) {
-                editor.remove(KEY_ROUTER_URL)
-            } else {
-                editor.putString(KEY_ROUTER_URL, url)
+            prefs.edit {
+                if (url.isBlank()) {
+                    remove(KEY_ROUTER_URL)
+                } else {
+                    putString(KEY_ROUTER_URL, url)
+                }
             }
-            editor.apply()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

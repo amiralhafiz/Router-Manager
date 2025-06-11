@@ -1,29 +1,28 @@
 package com.example.routermanager
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.app.AlertDialog
-import android.webkit.SslErrorHandler
+import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.net.http.SslError
+import android.os.Build
+import android.os.Bundle
+import android.view.View
+import android.webkit.CookieManager
+import android.webkit.JsResult
+import android.webkit.SslErrorHandler
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.webkit.WebChromeClient
-import android.webkit.JsResult
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceError
-import android.webkit.WebSettings
-import android.webkit.CookieManager
-import android.os.Build
-import android.graphics.Bitmap
-import android.view.View
 import android.widget.ProgressBar
-import android.content.Intent
-import com.example.routermanager.EXTRA_FORCE_SETUP
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import android.content.SharedPreferences
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 private const val KEY_ROUTER_URL = "routerUrl"
 private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
@@ -93,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        @Deprecated("Deprecated in Java")
         @Suppress("DEPRECATION")
         override fun onReceivedError(
             view: WebView?,
@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
 
 
         offButton.setOnClickListener {
-            prefs.edit().clear().apply()
+            prefs.edit { clear() }
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
