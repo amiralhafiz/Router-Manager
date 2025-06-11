@@ -16,7 +16,9 @@ import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
 import android.content.SharedPreferences
+import android.content.Intent
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         val speedTestButton: FloatingActionButton = findViewById(R.id.speedTestButton)
         val homeButton: FloatingActionButton = findViewById(R.id.homeButton)
+        val offButton: ExtendedFloatingActionButton = findViewById(R.id.offButton)
         progressBar = findViewById(R.id.loadingProgress)
         webView.webViewClient = RouterWebViewClient()
         webView.webChromeClient = object : WebChromeClient() {
@@ -145,6 +148,13 @@ class MainActivity : AppCompatActivity() {
 
         homeButton.setOnClickListener {
             webView.loadUrl(routerUrl)
+        }
+
+        offButton.setOnClickListener {
+            getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply()
+            sharedPrefs.edit().clear().apply()
+            startActivity(Intent(this, SetupActivity::class.java))
+            finish()
         }
     }
 
