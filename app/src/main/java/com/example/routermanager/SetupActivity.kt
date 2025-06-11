@@ -9,21 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 
 const val EXTRA_FORCE_SETUP = "forceSetup"
-private const val KEY_ROUTER_URL = "routerUrl"
 
 class SetupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val forceSetup = intent.getBooleanExtra(EXTRA_FORCE_SETUP, false)
         val prefs = getSharedPreferences("settings", MODE_PRIVATE)
-        if (!forceSetup && prefs.contains(KEY_ROUTER_URL)) {
+        if (!forceSetup && prefs.contains(PrefsKeys.KEY_ROUTER_URL)) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
         }
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
-        urlField.setText(prefs.getString(KEY_ROUTER_URL, ""))
+        urlField.setText(prefs.getString(PrefsKeys.KEY_ROUTER_URL, ""))
         val accessButton: FloatingActionButton = findViewById(R.id.accessButton)
 
         urlField.setOnEditorActionListener { _, actionId, _ ->
@@ -39,9 +38,9 @@ class SetupActivity : AppCompatActivity() {
             val url = urlField.text.toString().trim()
             prefs.edit {
                 if (url.isBlank()) {
-                    remove(KEY_ROUTER_URL)
+                    remove(PrefsKeys.KEY_ROUTER_URL)
                 } else {
-                    putString(KEY_ROUTER_URL, url)
+                    putString(PrefsKeys.KEY_ROUTER_URL, url)
                 }
             }
             startActivity(Intent(this, MainActivity::class.java))

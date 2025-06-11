@@ -24,9 +24,7 @@ import androidx.core.content.edit
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-private const val KEY_ROUTER_URL = "routerUrl"
 private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
-private const val KEY_SSL_TRUSTED = "sslTrusted"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
@@ -56,12 +54,12 @@ class MainActivity : AppCompatActivity() {
                     )
                     .setPositiveButton("Continue") { _, _ ->
                         sslTrusted = true
-                        prefs.edit { putBoolean(KEY_SSL_TRUSTED, true) }
+                        prefs.edit { putBoolean(PrefsKeys.KEY_SSL_TRUSTED, true) }
                         pendingSslHandlers.forEach { it.proceed() }
                         pendingSslHandlers.clear()
                     }
                     .setNegativeButton("Cancel") { _, _ ->
-                        prefs.edit { remove(KEY_SSL_TRUSTED) }
+                        prefs.edit { remove(PrefsKeys.KEY_SSL_TRUSTED) }
                         pendingSslHandlers.forEach { it.cancel() }
                         pendingSslHandlers.clear()
                     }
@@ -126,9 +124,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prefs = getSharedPreferences("settings", MODE_PRIVATE)
-        sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED)
-            ?: prefs.getBoolean(KEY_SSL_TRUSTED, false)
-        val routerUrl = prefs.getString(KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
+        sslTrusted = savedInstanceState?.getBoolean(PrefsKeys.KEY_SSL_TRUSTED)
+            ?: prefs.getBoolean(PrefsKeys.KEY_SSL_TRUSTED, false)
+        val routerUrl = prefs.getString(PrefsKeys.KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
             ?: DEFAULT_ROUTER_URL
         setContentView(R.layout.activity_main)
 
@@ -218,6 +216,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(KEY_SSL_TRUSTED, sslTrusted)
+        outState.putBoolean(PrefsKeys.KEY_SSL_TRUSTED, sslTrusted)
     }
 }
