@@ -1,36 +1,13 @@
 com.example.routermanager.app-pngs-0 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\generated\res\pngs\debug
 com.example.routermanager.app-resValues-1 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\generated\res\resValues\debug
-com.example.routermanager.app-mergeDebugResources-2 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
-com.example.routermanager.app-mergeDebugResources-3 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.routermanager.app-packageDebugResources-2 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.routermanager.app-packageDebugResources-3 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
 com.example.routermanager.app-debug-4 C:\8.2.12-xampp\htdocs\Router-Manager\app\build\intermediates\merged_res\debug\mergeDebugResources
 com.example.routermanager.app-debug-5 C:\8.2.12-xampp\htdocs\Router-Manager\app\src\debug\res
 com.example.routermanager.app-main-6 C:\8.2.12-xampp\htdocs\Router-Manager\app\src\main\res
 com.example.routermanager.app-lifecycle-livedata-core-2.5.1-7 C:\Users\amirh\.gradle\caches\8.12\transforms\08e253ba49672f1eb345405d5f1d8e34\transformed\lifecycle-livedata-core-2.5.1\res
 com.example.routermanager.app-cardview-1.0.0-8 C:\Users\amirh\.gradle\caches\8.12\transforms\140e5e193d571535a52c5362c9139a65\transformed\cardview-1.0.0\res
 com.example.routermanager.app-appcompat-1.6.1-9 C:\Users\amirh\.gradle\caches\8.12\transforms\2a7bb00b1d300d8dc253cbf8ba5b6cd0\transformed\appcompat-1.6.1\res
-<<<<<<< Updated upstream
-com.example.routermanager.app-jetified-emoji2-1.2.0-10 C:\Users\amirh\.gradle\caches\8.12\transforms\2b252d46d68e727de83c89bafeb188f9\transformed\jetified-emoji2-1.2.0\res
-com.example.routermanager.app-jetified-lifecycle-process-2.4.1-11 C:\Users\amirh\.gradle\caches\8.12\transforms\31ae8855147e0dfcb406997fe985676d\transformed\jetified-lifecycle-process-2.4.1\res
-com.example.routermanager.app-jetified-activity-1.6.0-12 C:\Users\amirh\.gradle\caches\8.12\transforms\3e6ac63e5cc1ec735fe4e93eec287b6b\transformed\jetified-activity-1.6.0\res
-com.example.routermanager.app-jetified-savedstate-1.2.0-13 C:\Users\amirh\.gradle\caches\8.12\transforms\6d56bff6e151a32dca51af7d711c345f\transformed\jetified-savedstate-1.2.0\res
-com.example.routermanager.app-webkit-1.7.0-14 C:\Users\amirh\.gradle\caches\8.12\transforms\741b125303eab0fb9c03ea74e7ce8246\transformed\webkit-1.7.0\res
-com.example.routermanager.app-lifecycle-viewmodel-2.5.1-15 C:\Users\amirh\.gradle\caches\8.12\transforms\7ba0e6eb4a43e8625a098d247431e81f\transformed\lifecycle-viewmodel-2.5.1\res
-com.example.routermanager.app-lifecycle-runtime-2.5.1-16 C:\Users\amirh\.gradle\caches\8.12\transforms\95b4d4fd195ac67fdc002bbc9ccd0b1d\transformed\lifecycle-runtime-2.5.1\res
-com.example.routermanager.app-constraintlayout-2.1.4-17 C:\Users\amirh\.gradle\caches\8.12\transforms\9bff1d0ee45ec856d10f0f3039ef41b2\transformed\constraintlayout-2.1.4\res
-com.example.routermanager.app-transition-1.2.0-18 C:\Users\amirh\.gradle\caches\8.12\transforms\a5bcbafaa371452c54b9311265a76d83\transformed\transition-1.2.0\res
-com.example.routermanager.app-core-1.9.0-19 C:\Users\amirh\.gradle\caches\8.12\transforms\ae61077ce32c56936ee973750058407f\transformed\core-1.9.0\res
-com.example.routermanager.app-recyclerview-1.1.0-20 C:\Users\amirh\.gradle\caches\8.12\transforms\afd2b3c35fe41405dc906d95a7389fde\transformed\recyclerview-1.1.0\res
-com.example.routermanager.app-fragment-1.3.6-21 C:\Users\amirh\.gradle\caches\8.12\transforms\be261e809d37999301277cbd5e7e70a4\transformed\fragment-1.3.6\res
-com.example.routermanager.app-jetified-lifecycle-viewmodel-savedstate-2.5.1-22 C:\Users\amirh\.gradle\caches\8.12\transforms\c1a26847806142dfe21a47b1df0d83b8\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
-com.example.routermanager.app-jetified-emoji2-views-helper-1.2.0-23 C:\Users\amirh\.gradle\caches\8.12\transforms\c4686f971244767eb6fcb316d0305a8c\transformed\jetified-emoji2-views-helper-1.2.0\res
-com.example.routermanager.app-jetified-viewpager2-1.0.0-24 C:\Users\amirh\.gradle\caches\8.12\transforms\c7f57aa862f44cbdf252ffb57abec59f\transformed\jetified-viewpager2-1.0.0\res
-com.example.routermanager.app-jetified-core-ktx-1.9.0-25 C:\Users\amirh\.gradle\caches\8.12\transforms\cb013ede82a69150a2682ad634aaa2f6\transformed\jetified-core-ktx-1.9.0\res
-com.example.routermanager.app-jetified-appcompat-resources-1.6.1-26 C:\Users\amirh\.gradle\caches\8.12\transforms\e3e2db4c54e3e1b6294c422808905ab2\transformed\jetified-appcompat-resources-1.6.1\res
-com.example.routermanager.app-material-1.9.0-27 C:\Users\amirh\.gradle\caches\8.12\transforms\e54ab6012a83c85b2b2324c21d599a4a\transformed\material-1.9.0\res
-com.example.routermanager.app-jetified-startup-runtime-1.1.1-28 C:\Users\amirh\.gradle\caches\8.12\transforms\e6af7cff924e2d980797e1e20296b8cc\transformed\jetified-startup-runtime-1.1.1\res
-com.example.routermanager.app-coordinatorlayout-1.1.0-29 C:\Users\amirh\.gradle\caches\8.12\transforms\ec5e570b8c00909f18c09e51e420ec39\transformed\coordinatorlayout-1.1.0\res
-com.example.routermanager.app-jetified-annotation-experimental-1.3.0-30 C:\Users\amirh\.gradle\caches\8.12\transforms\f9a08deebd0f4f88444e6783a06a661d\transformed\jetified-annotation-experimental-1.3.0\res
-=======
 com.example.routermanager.app-appcompat-resources-1.6.1-10 C:\Users\amirh\.gradle\caches\8.12\transforms\4fd9ef770747d6577fb80075244f536a\transformed\appcompat-resources-1.6.1\res
 com.example.routermanager.app-annotation-experimental-1.3.0-11 C:\Users\amirh\.gradle\caches\8.12\transforms\50cab98543a262a2c57471f800468a9e\transformed\annotation-experimental-1.3.0\res
 com.example.routermanager.app-startup-runtime-1.1.1-12 C:\Users\amirh\.gradle\caches\8.12\transforms\6928999598c3213805102efd9b06a04a\transformed\startup-runtime-1.1.1\res
@@ -52,5 +29,4 @@ com.example.routermanager.app-coordinatorlayout-1.1.0-27 C:\Users\amirh\.gradle\
 com.example.routermanager.app-savedstate-1.2.0-28 C:\Users\amirh\.gradle\caches\8.12\transforms\ef660de723363b3b3399a935c52dc4bc\transformed\savedstate-1.2.0\res
 com.example.routermanager.app-viewpager2-1.0.0-29 C:\Users\amirh\.gradle\caches\8.12\transforms\fa12ca13fa6146719ebe6dbca465df47\transformed\viewpager2-1.0.0\res
 com.example.routermanager.app-lifecycle-process-2.4.1-30 C:\Users\amirh\.gradle\caches\8.12\transforms\fb136819903b0f0a3140719b5979cc63\transformed\lifecycle-process-2.4.1\res
->>>>>>> Stashed changes
 com.example.routermanager.app-drawerlayout-1.1.1-31 C:\Users\amirh\.gradle\caches\8.12\transforms\fcd7af940d5fdd601c29d3e6e48e40f8\transformed\drawerlayout-1.1.1\res
