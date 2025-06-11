@@ -20,9 +20,12 @@ android {
             minifyEnabled false
         }
     }
+<<<<<<< Updated upstream
     kotlinOptions {
         jvmTarget = "17"
     }
+=======
+>>>>>>> Stashed changes
     namespace 'com.example.routermanager'
 }
 
