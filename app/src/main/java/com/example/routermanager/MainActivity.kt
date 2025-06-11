@@ -1,5 +1,6 @@
 package com.example.routermanager
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.app.AlertDialog
 import android.webkit.SslErrorHandler
@@ -17,13 +18,14 @@ import android.widget.ProgressBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
-private const val ROUTER_URL = "https://10.80.80.1/"
+private const val ROUTER_URL = "http://10.80.80.1/"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private var sslTrusted: Boolean = false
 
     private inner class RouterWebViewClient : WebViewClient() {
+        @SuppressLint("WebViewClientOnReceivedSslError")
         override fun onReceivedSslError(
             view: WebView?,
             handler: SslErrorHandler?,
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
         }
     }
+    @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
