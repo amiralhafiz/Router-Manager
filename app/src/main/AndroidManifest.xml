@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".SpeedTestActivity" android:exported="true" />
     </application>
 
 </manifest>
