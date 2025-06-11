@@ -18,6 +18,7 @@ import android.widget.ProgressBar
 import android.content.SharedPreferences
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 
 private const val ROUTER_URL = "https://10.80.80.1/"
 private const val KEY_SSL_TRUSTED = "sslTrusted"
@@ -50,12 +51,12 @@ class MainActivity : AppCompatActivity() {
                     )
                     .setPositiveButton("Continue") { _, _ ->
                         sslTrusted = true
-                        sharedPrefs.edit().putBoolean(KEY_SSL_TRUSTED, true).apply()
+                        sharedPrefs.edit { putBoolean(KEY_SSL_TRUSTED, true) }
                         pendingSslHandlers.forEach { it.proceed() }
                         pendingSslHandlers.clear()
                     }
                     .setNegativeButton("Cancel") { _, _ ->
-                        sharedPrefs.edit().remove(KEY_SSL_TRUSTED).apply()
+                        sharedPrefs.edit { remove(KEY_SSL_TRUSTED) }
                         pendingSslHandlers.forEach { it.cancel() }
                         pendingSslHandlers.clear()
                     }
