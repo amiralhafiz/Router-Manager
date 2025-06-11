@@ -22,7 +22,7 @@ class MainActivityTest {
             if (noViewFoundException != null) throw noViewFoundException
             val webView = view as WebView
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-            assertEquals("http://10.80.80.1/", webView.url)
+            assertEquals("https://10.80.80.1/", webView.url)
         }
     }
 }
