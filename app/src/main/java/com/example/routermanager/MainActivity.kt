@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         speedTestButton.setOnClickListener {
-            webView.loadUrl("https://unifi-my.speedtestcustom.com/")
+            startActivity(Intent(this, SpeedTestActivity::class.java))
         }
 
         homeButton.setOnClickListener {
