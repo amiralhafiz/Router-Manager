@@ -17,12 +17,12 @@ import android.os.Build
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
-import android.content.SharedPreferences
 import android.content.Intent
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import android.content.SharedPreferences
 
 private const val KEY_ROUTER_URL = "routerUrl"
 private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
@@ -30,7 +30,7 @@ private const val KEY_SSL_TRUSTED = "sslTrusted"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var prefs: SharedPreferences
     private var sslTrusted: Boolean = false
     private val pendingSslHandlers = mutableListOf<SslErrorHandler>()
 
@@ -56,12 +56,12 @@ class MainActivity : AppCompatActivity() {
                     )
                     .setPositiveButton("Continue") { _, _ ->
                         sslTrusted = true
-                        sharedPrefs.edit { putBoolean(KEY_SSL_TRUSTED, true) }
+                        prefs.edit { putBoolean(KEY_SSL_TRUSTED, true) }
                         pendingSslHandlers.forEach { it.proceed() }
                         pendingSslHandlers.clear()
                     }
                     .setNegativeButton("Cancel") { _, _ ->
-                        sharedPrefs.edit { remove(KEY_SSL_TRUSTED) }
+                        prefs.edit { remove(KEY_SSL_TRUSTED) }
                         pendingSslHandlers.forEach { it.cancel() }
                         pendingSslHandlers.clear()
                     }
@@ -122,11 +122,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPrefs = getPreferences(MODE_PRIVATE)
+        prefs = getSharedPreferences("settings", MODE_PRIVATE)
         sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED)
-            ?: sharedPrefs.getBoolean(KEY_SSL_TRUSTED, false)
-        val settings = getSharedPreferences("settings", MODE_PRIVATE)
-        val routerUrl = settings.getString(KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
+            ?: prefs.getBoolean(KEY_SSL_TRUSTED, false)
+        val routerUrl = prefs.getString(KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
             ?: DEFAULT_ROUTER_URL
         setContentView(R.layout.activity_main)
 
@@ -192,8 +191,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         offButton.setOnClickListener {
-            getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply()
-            sharedPrefs.edit().clear().apply()
+            prefs.edit().clear().apply()
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
