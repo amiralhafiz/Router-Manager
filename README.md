@@ -33,12 +33,6 @@ Not all routers come with official mobile apps. Most rely on outdated web portal
 
 ---
 
-## 📷 Preview
-
-> _(Coming soon - UI screenshots and demo GIFs to help users visualize the app.)_
-
----
-
 ## ⚙️ Prerequisites
 
 Before building or running the project, ensure the following are installed:
@@ -150,4 +144,3 @@ You are free to use, modify, and distribute the code with proper attribution.
 RouterManager is not intended as a replacement for official router apps or UIs. Instead, it offers a convenient, mobile-optimized wrapper around what already exists - built as a personal-use utility and a **demonstration of AI-enhanced software development**.
 
 Feel free to clone, run, and explore the code. Feedback is welcome!
-```
