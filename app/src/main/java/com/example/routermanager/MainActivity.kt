@@ -8,6 +8,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
 import android.webkit.JsResult
+import android.webkit.WebSettings
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
@@ -67,7 +68,11 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
-        webView.settings.javaScriptEnabled = true
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        }
         webView.loadUrl(ROUTER_URL)
         refreshButton.setOnClickListener { webView.reload() }
     }
