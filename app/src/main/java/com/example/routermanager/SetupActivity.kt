@@ -11,6 +11,7 @@ import android.text.format.Formatter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import com.example.routermanager.BuildConfig
 
 const val EXTRA_FORCE_SETUP = "forceSetup"
 
