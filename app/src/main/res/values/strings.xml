@@ -5,4 +5,6 @@
     <string name="action_speed_test">Speed Test</string>
     <string name="action_back">Back</string>
     <string name="action_power_off">Power Off</string>
+    <string name="action_expand">Expand</string>
+    <string name="action_collapse">Collapse</string>
 </resources>
