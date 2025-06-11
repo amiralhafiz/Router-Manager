@@ -6,10 +6,15 @@ import android.webkit.SslErrorHandler
 import android.net.http.SslError
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.graphics.Bitmap
+import android.view.View
+import android.widget.ProgressBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var progressBar: ProgressBar
+
     private inner class RouterWebViewClient : WebViewClient() {
         override fun onReceivedSslError(
             view: WebView?,
@@ -24,6 +29,16 @@ class MainActivity : AppCompatActivity() {
                 .setCancelable(false)
                 .show()
         }
+
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+            super.onPageStarted(view, url, favicon)
+            progressBar.visibility = View.VISIBLE
+        }
+
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+            progressBar.visibility = View.GONE
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val webView: WebView = findViewById(R.id.routerWebView)
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
+        progressBar = findViewById(R.id.loadingProgress)
         webView.webViewClient = RouterWebViewClient()
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://10.80.80.1/")
