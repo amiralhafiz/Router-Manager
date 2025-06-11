@@ -32,7 +32,7 @@ class SpeedTestActivity : AppCompatActivity() {
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
         CookieManager.getInstance().setAcceptCookie(true)
-        webView.loadUrl("https://unifi-my.speedtestcustom.com/")
+        webView.loadUrl(/* url = */ "https://www.speedtest.net/")
 
         backButton.setOnClickListener {
             finish()
