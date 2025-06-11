@@ -21,8 +21,14 @@ class SetupActivity : AppCompatActivity() {
         val urlField: EditText = findViewById(R.id.urlEditText)
         val accessButton: Button = findViewById(R.id.accessButton)
         accessButton.setOnClickListener {
-            val url = urlField.text.toString()
-            prefs.edit().putString(KEY_ROUTER_URL, url).apply()
+            val url = urlField.text.toString().trim()
+            val editor = prefs.edit()
+            if (url.isBlank()) {
+                editor.remove(KEY_ROUTER_URL)
+            } else {
+                editor.putString(KEY_ROUTER_URL, url)
+            }
+            editor.apply()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
