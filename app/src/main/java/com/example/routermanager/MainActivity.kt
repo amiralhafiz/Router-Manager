@@ -18,7 +18,7 @@ import android.widget.ProgressBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
-private const val ROUTER_URL = "http://10.80.80.1/"
+private const val ROUTER_URL = "https://10.80.80.1/"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
