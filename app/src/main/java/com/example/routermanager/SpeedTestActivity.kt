@@ -35,7 +35,6 @@ class SpeedTestActivity : AppCompatActivity() {
         }
         offButton.setOnClickListener {
             getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply()
-            getPreferences(MODE_PRIVATE).edit().clear().apply()
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
