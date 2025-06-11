@@ -7,4 +7,12 @@
     <string name="action_power_off">Power Off</string>
     <string name="action_expand">Expand</string>
     <string name="action_collapse">Collapse</string>
+    <string name="ssl_certificate_error_title">SSL Certificate Error</string>
+    <string name="ssl_certificate_error_message">The router presented an untrusted certificate. Continue anyway?</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="page_load_error_title">Page Load Error</string>
+    <string name="page_load_error_message">Unable to load the router page. Please check the address and try again.</string>
+    <string name="action_back_to_setup">Back to Setup</string>
+    <string name="hint_router_url">Router URL</string>
 </resources>

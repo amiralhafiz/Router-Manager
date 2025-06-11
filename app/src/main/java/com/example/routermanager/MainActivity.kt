@@ -48,17 +48,17 @@ class MainActivity : AppCompatActivity() {
 
             if (pendingSslHandlers.size == 1) {
                 AlertDialog.Builder(this@MainActivity)
-                    .setTitle("SSL Certificate Error")
+                    .setTitle(getString(R.string.ssl_certificate_error_title))
                     .setMessage(
-                        "The router presented an untrusted certificate. Continue anyway?"
+                        getString(R.string.ssl_certificate_error_message)
                     )
-                    .setPositiveButton("Continue") { _, _ ->
+                    .setPositiveButton(getString(R.string.action_continue)) { _, _ ->
                         sslTrusted = true
                         prefs.edit { putBoolean(PrefsKeys.KEY_SSL_TRUSTED, true) }
                         pendingSslHandlers.forEach { it.proceed() }
                         pendingSslHandlers.clear()
                     }
-                    .setNegativeButton("Cancel") { _, _ ->
+                    .setNegativeButton(getString(R.string.action_cancel)) { _, _ ->
                         prefs.edit { remove(PrefsKeys.KEY_SSL_TRUSTED) }
                         pendingSslHandlers.forEach { it.cancel() }
                         pendingSslHandlers.clear()
@@ -109,9 +109,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoadError() {
         AlertDialog.Builder(this)
-            .setTitle("Page Load Error")
-            .setMessage("Unable to load the router page. Please check the address and try again.")
-            .setPositiveButton("Back to Setup") { _, _ ->
+            .setTitle(getString(R.string.page_load_error_title))
+            .setMessage(getString(R.string.page_load_error_message))
+            .setPositiveButton(getString(R.string.action_back_to_setup)) { _, _ ->
                 val intent = Intent(this, SetupActivity::class.java)
                 intent.putExtra(EXTRA_FORCE_SETUP, true)
                 startActivity(intent)

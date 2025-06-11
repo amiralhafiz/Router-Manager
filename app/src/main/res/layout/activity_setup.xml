@@ -23,7 +23,7 @@
         android:id="@+id/urlEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Router URL"
+        android:hint="@string/hint_router_url"
         android:singleLine="true"
         android:imeOptions="actionDone"
         app:layout_constraintStart_toStartOf="parent"
