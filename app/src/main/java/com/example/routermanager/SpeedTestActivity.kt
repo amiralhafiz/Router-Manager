@@ -10,6 +10,7 @@ import android.content.Intent
 import android.webkit.WebSettings
 import android.webkit.CookieManager
 import androidx.core.content.edit
+import android.view.View
 
 class SpeedTestActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
@@ -21,6 +22,8 @@ class SpeedTestActivity : AppCompatActivity() {
         val backButton: FloatingActionButton = findViewById(R.id.backButton)
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         val offButton: ExtendedFloatingActionButton = findViewById(R.id.offButton)
+        val buttonContainer: View = findViewById(R.id.buttonContainer)
+        val toggleFab: FloatingActionButton = findViewById(R.id.toggleFab)
 
         webView.settings.apply {
             javaScriptEnabled = true
@@ -35,6 +38,24 @@ class SpeedTestActivity : AppCompatActivity() {
         }
         refreshButton.setOnClickListener {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
+        }
+        toggleFab.setOnClickListener {
+            val visible = buttonContainer.visibility == View.VISIBLE
+            if (visible) {
+                buttonContainer.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .withEndAction { buttonContainer.visibility = View.GONE }
+                    .start()
+                toggleFab.setImageResource(android.R.drawable.ic_menu_more)
+                toggleFab.contentDescription = getString(R.string.action_expand)
+            } else {
+                buttonContainer.alpha = 0f
+                buttonContainer.visibility = View.VISIBLE
+                buttonContainer.animate().alpha(1f).setDuration(200).start()
+                toggleFab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+                toggleFab.contentDescription = getString(R.string.action_collapse)
+            }
         }
         offButton.setOnClickListener {
             getSharedPreferences("settings", MODE_PRIVATE).edit { clear() }
