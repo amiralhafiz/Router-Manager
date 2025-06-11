@@ -19,6 +19,14 @@ Use the provided Gradle wrapper scripts to build or install the app. On Unix sys
 ./gradlew installDebug
 ```
 
+## Versioning
+
+The build script derives the app's version from the Git commit history. During
+configuration it runs `git rev-list --count HEAD` to calculate a commit count.
+This value becomes the `versionCode` and is appended to `1.` to form the
+`versionName`. As a result, version numbers change whenever the repository's
+history changes.
+
 ## Running Instrumentation Tests
 
 Ensure a device or emulator is connected and run:
