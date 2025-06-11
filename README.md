@@ -1,6 +1,6 @@
 # RouterManager
 
-**RouterManager** is a lightweight Android application that wraps your router’s web management portal inside a native mobile interface using WebView. It automatically detects your router's IP address and provides quick, repeatable access — removing the need to open a browser and manually enter an IP each time.
+**RouterManager** is a lightweight Android application that wraps your router’s web management portal inside a native mobile interface using WebView. It automatically detects your router's IP address and provides quick, repeatable access - removing the need to open a browser and manually enter an IP each time.
 
 ---
 
@@ -8,13 +8,13 @@
 
 This project was built with approximately **80% of the code written using ChatGPT Codex**. More than just a code assistant, the AI acted as a **coding collaborator and QA engine**, helping validate architecture, fix issues in real time, and streamline repetitive development tasks.
 
-> ❗ This project is not designed to teach programming. Its purpose is to demonstrate how modern AI tools can meaningfully **accelerate real-world software development** — even for production-ready mobile apps.
+> ❗ This project is not designed to teach programming. Its purpose is to demonstrate how modern AI tools can meaningfully **accelerate real-world software development** - even for production-ready mobile apps.
 
 ---
 
 ## 🔧 Why a Router Manager?
 
-Not all routers come with official mobile apps. Most rely on outdated web portals that require manual IP entry in a browser. This app doesn't attempt to replace the router’s UI — instead, it **augments it** by offering:
+Not all routers come with official mobile apps. Most rely on outdated web portals that require manual IP entry in a browser. This app doesn't attempt to replace the router’s UI - instead, it **augments it** by offering:
 
 - 🔍 Automatic router IP detection
 - 🌐 Native WebView integration
@@ -35,7 +35,7 @@ Not all routers come with official mobile apps. Most rely on outdated web portal
 
 ## 📷 Preview
 
-> _(Coming soon — UI screenshots and demo GIFs to help users visualize the app.)_
+> _(Coming soon - UI screenshots and demo GIFs to help users visualize the app.)_
 
 ---
 
@@ -46,7 +46,7 @@ Before building or running the project, ensure the following are installed:
 - **Android Studio** (Electric Eel or newer recommended)
 - **Android SDK**
 - **JDK 17** (required for Android Gradle Plugin 8.x)
-- **Git** (for automatic versioning — fallback supported if missing)
+- **Git** (for automatic versioning - fallback supported if missing)
 
 ---
 
@@ -76,8 +76,8 @@ This will build and optionally install the debug APK on a connected Android devi
 
 This app uses Git-based versioning built into the Gradle build script.
 
-- `git rev-list --count HEAD` → used as `versionCode`
-- `git rev-parse --short HEAD` → used as part of `versionName`
+- `git rev-list --count HEAD` is used as `versionCode`
+- `git rev-parse --short HEAD` is used as part of `versionName`
 
 Fallback logic applies if Git is unavailable:
 
@@ -134,7 +134,7 @@ RouterManager may require network access permissions to detect your router's gat
 **Amir Al Hafiz**
 
 > Maintainer and creator of RouterManager  
-> Built using ChatGPT Codex — AI-powered Android development
+> Built using ChatGPT Codex - AI-powered Android development
 
 ---
 
@@ -147,8 +147,7 @@ You are free to use, modify, and distribute the code with proper attribution.
 
 ## 📢 Final Notes
 
-RouterManager is not intended as a replacement for official router apps or UIs. Instead, it offers a convenient, mobile-optimized wrapper around what already exists — built as a personal-use utility and a **demonstration of AI-enhanced software development**.
+RouterManager is not intended as a replacement for official router apps or UIs. Instead, it offers a convenient, mobile-optimized wrapper around what already exists - built as a personal-use utility and a **demonstration of AI-enhanced software development**.
 
 Feel free to clone, run, and explore the code. Feedback is welcome!
-
 ```
