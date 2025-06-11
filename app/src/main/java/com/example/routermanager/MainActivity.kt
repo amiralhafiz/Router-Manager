@@ -21,6 +21,7 @@ private const val ROUTER_URL = "https://10.80.80.1/"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
+    private var sslTrusted: Boolean = false
 
     private inner class RouterWebViewClient : WebViewClient() {
         override fun onReceivedSslError(
@@ -28,10 +29,18 @@ class MainActivity : AppCompatActivity() {
             handler: SslErrorHandler?,
             error: SslError?
         ) {
+            if (sslTrusted) {
+                handler?.proceed()
+                return
+            }
+
             AlertDialog.Builder(this@MainActivity)
                 .setTitle("SSL Certificate Error")
                 .setMessage("The router presented an untrusted certificate. Continue anyway?")
-                .setPositiveButton("Continue") { _, _ -> handler?.proceed() }
+                .setPositiveButton("Continue") { _, _ ->
+                    sslTrusted = true
+                    handler?.proceed()
+                }
                 .setNegativeButton("Cancel") { _, _ -> handler?.cancel() }
                 .setCancelable(false)
                 .show()
