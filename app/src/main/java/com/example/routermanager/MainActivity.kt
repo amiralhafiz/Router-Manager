@@ -15,6 +15,7 @@ import android.os.Build
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
+import android.content.SharedPreferences
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
@@ -23,6 +24,7 @@ private const val KEY_SSL_TRUSTED = "sslTrusted"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
+    private lateinit var sharedPrefs: SharedPreferences
     private var sslTrusted: Boolean = false
     private val pendingSslHandlers = mutableListOf<SslErrorHandler>()
 
@@ -48,10 +50,12 @@ class MainActivity : AppCompatActivity() {
                     )
                     .setPositiveButton("Continue") { _, _ ->
                         sslTrusted = true
+                        sharedPrefs.edit().putBoolean(KEY_SSL_TRUSTED, true).apply()
                         pendingSslHandlers.forEach { it.proceed() }
                         pendingSslHandlers.clear()
                     }
                     .setNegativeButton("Cancel") { _, _ ->
+                        sharedPrefs.edit().remove(KEY_SSL_TRUSTED).apply()
                         pendingSslHandlers.forEach { it.cancel() }
                         pendingSslHandlers.clear()
                     }
@@ -73,7 +77,9 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED) ?: false
+        sharedPrefs = getPreferences(MODE_PRIVATE)
+        sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED)
+            ?: sharedPrefs.getBoolean(KEY_SSL_TRUSTED, false)
         setContentView(R.layout.activity_main)
 
         val webView: WebView = findViewById(R.id.routerWebView)
