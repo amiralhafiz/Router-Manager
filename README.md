@@ -1,68 +1,162 @@
+Here is your **full `README.md` file**, written from top to bottom with clear structure, professional language, and emphasis on your project's uniqueness — including its AI-assisted development workflow:
+
+---
+
+````markdown
 # RouterManager
 
-RouterManager is a simple Android application that opens a WebView pointing to your router's management interface. On first launch the app automatically scans your network and populates the router URL. This address is stored for future launches and can be reset later using the **Off** button.
+**RouterManager** is a lightweight Android application that wraps your router’s web management portal inside a native mobile interface using WebView. It automatically detects your router's IP address and provides quick, repeatable access — removing the need to open a browser and manually enter an IP each time.
 
-## Prerequisites
+---
 
-- **Android SDK** – Ensure the Android SDK is installed and that you have an Android device or emulator available.
-- **JDK 17** – The project uses Android Gradle Plugin 8.x which requires JDK 17.
-- **Git** – Required for automatic versioning. If Git isn't available the build
-  falls back to a default version.
+## 🧠 AI-Built: Powered by ChatGPT Codex
 
-## Building with the Gradle Wrapper
+This project was built with approximately **80% of the code written using ChatGPT Codex**. More than just a code assistant, the AI acted as a **coding collaborator and QA engine**, helping validate architecture, fix issues in real time, and streamline repetitive development tasks.
 
-Use the provided Gradle wrapper scripts to build or install the app. On Unix systems run `./gradlew`; on Windows use `gradlew.bat`.
+> ❗ This project is not designed to teach programming. Its purpose is to demonstrate how modern AI tools can meaningfully **accelerate real-world software development** — even for production-ready mobile apps.
+
+---
+
+## 🔧 Why a Router Manager?
+
+Not all routers come with official mobile apps. Most rely on outdated web portals that require manual IP entry in a browser. This app doesn't attempt to replace the router’s UI — instead, it **augments it** by offering:
+
+- 🔍 Automatic router IP detection
+- 🌐 Native WebView integration
+- 🔁 Persistent, one-tap access to your router’s web admin panel
+- 📱 A mobile-optimized, app-like experience
+
+---
+
+## ✨ Features
+
+- ✅ Auto-scans local network for router IP
+- ✅ Saves IP for future launches
+- ✅ Loads the web interface in a secure WebView
+- ✅ "Off" button to reset stored IP
+- ✅ Simple and intuitive interface
+
+---
+
+## 📷 Preview
+
+> _(Coming soon — UI screenshots and demo GIFs to help users visualize the app.)_
+
+---
+
+## ⚙️ Prerequisites
+
+Before building or running the project, ensure the following are installed:
+
+- **Android Studio** (Electric Eel or newer recommended)
+- **Android SDK**
+- **JDK 17** (required for Android Gradle Plugin 8.x)
+- **Git** (for automatic versioning — fallback supported if missing)
+
+---
+
+## 🛠️ Building the App
+
+Use the Gradle wrapper provided in the project.
+
+### On macOS/Linux:
 
 ```bash
-# Build the debug APK
 ./gradlew assembleDebug
-
-# Install on a connected device or emulator
 ./gradlew installDebug
 ```
+````
 
-## Versioning
+### On Windows:
 
-The build script derives version information from Git. It uses
-`git rev-list --count HEAD` for the commit count and
-`git rev-parse --short HEAD` to obtain the short commit hash. The commit
-count becomes the `versionCode` and is split into `major`, `minor` and
-`patch` values.
-If Git cannot be found, the build logs a warning and uses commit count `1` and
-hash `dev`, resulting in a fallback version like `v0.00.01-dev`.
-
-Version names follow the `v<major>.<minor>.<patch>-<git hash>` scheme.
-`patch` increases with each commit and cycles from `01` through `10`. When it
-wraps back to `01`, `minor` increments. If `minor` reaches `10` it resets to
-`00` and `major` increments.
-
-Example sequence:
-
-```
-v0.00.01-<sha>
-...
-v0.00.10-<sha>
-v0.01.01-<sha>
+```cmd
+gradlew.bat assembleDebug
+gradlew.bat installDebug
 ```
 
-## Running Instrumentation Tests
+This will build and optionally install the debug APK on a connected Android device or emulator.
 
-Ensure a device or emulator is connected and run:
+---
+
+## 🚦 Versioning
+
+This app uses Git-based versioning built into the Gradle build script.
+
+- `git rev-list --count HEAD` → used as `versionCode`
+- `git rev-parse --short HEAD` → used as part of `versionName`
+
+Fallback logic applies if Git is unavailable:
+
+- `versionCode = 1`
+- `versionName = v0.00.01-dev`
+
+**Versioning format:**
+
+```
+v<major>.<minor>.<patch>-<sha>
+```
+
+Example:
+
+```
+v0.00.01-abc123
+v0.00.10-def456
+v0.01.01-ghi789
+```
+
+---
+
+## ✅ Running Instrumentation Tests
+
+To run Android UI tests:
 
 ```bash
 ./gradlew connectedAndroidTest
 ```
 
-## Launching the WebView App
+Ensure a device or emulator is connected.
 
-After installing the APK on your device, launch the **RouterManager** application. On the first run you'll see the setup screen while the app automatically scans for your router. The URL field is read-only and will be populated once the gateway is detected. Tap **Access** to continue. The WebView automatically loads this saved address on future launches.
+---
 
-You may also open the project in Android Studio and run it directly from there using the built-in Gradle wrapper support.
+## 📱 How to Use
 
-## Author
+1. Install the app on your Android device.
+2. Launch **RouterManager**.
+3. On first run, the app scans your local network and auto-detects your router’s IP.
+4. The router IP is saved for future launches.
+5. Tap **Access** to open the WebView.
+6. Use the **Off** button to reset the saved address and re-trigger detection.
 
-RouterManager is maintained by Amir Al Hafiz.
+---
 
-## License
+## 🔒 Permissions
 
-This project is licensed under the [MIT License](LICENSE).
+RouterManager may require network access permissions to detect your router's gateway IP. No personal data is collected or transmitted.
+
+---
+
+## 👤 Author
+
+**Amir Al Hafiz**
+
+> Maintainer and creator of RouterManager  
+> Built using ChatGPT Codex — AI-powered Android development
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).  
+You are free to use, modify, and distribute the code with proper attribution.
+
+---
+
+## 📢 Final Notes
+
+RouterManager is not intended as a replacement for official router apps or UIs. Instead, it offers a convenient, mobile-optimized wrapper around what already exists — built as a personal-use utility and a **demonstration of AI-enhanced software development**.
+
+Feel free to clone, run, and explore the code. Feedback is welcome!
+
+```
+
+```
