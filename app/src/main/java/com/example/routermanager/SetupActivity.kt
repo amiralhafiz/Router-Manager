@@ -3,8 +3,8 @@ package com.example.routermanager
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 
@@ -24,7 +24,7 @@ class SetupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
         urlField.setText(prefs.getString(KEY_ROUTER_URL, ""))
-        val accessButton: Button = findViewById(R.id.accessButton)
+        val accessButton: FloatingActionButton = findViewById(R.id.accessButton)
 
         urlField.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
