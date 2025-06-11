@@ -3,7 +3,6 @@ package com.example.routermanager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.net.wifi.WifiManager
@@ -41,18 +40,8 @@ class SetupActivity : AppCompatActivity() {
             runOnUiThread {
                 address?.let { urlField.setText("https://$it/") }
                 progress.visibility = View.GONE
-                urlField.isEnabled = true
             }
         }.start()
-
-        urlField.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                accessButton.performClick()
-                true
-            } else {
-                false
-            }
-        }
 
         accessButton.setOnClickListener {
             val url = urlField.text.toString().trim()
