@@ -31,6 +31,6 @@ class MainActivity : AppCompatActivity() {
         val webView: WebView = findViewById(R.id.routerWebView)
         webView.webViewClient = RouterWebViewClient()
         webView.settings.javaScriptEnabled = true
-        webView.loadUrl("http://10.80.80.1/")
+        webView.loadUrl("https://10.80.80.1/")
     }
 }
