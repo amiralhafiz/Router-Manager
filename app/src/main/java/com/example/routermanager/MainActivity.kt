@@ -6,6 +6,7 @@ import android.webkit.SslErrorHandler
 import android.net.http.SslError
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -29,8 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val webView: WebView = findViewById(R.id.routerWebView)
+        val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         webView.webViewClient = RouterWebViewClient()
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://10.80.80.1/")
+        refreshButton.setOnClickListener { webView.reload() }
     }
 }
