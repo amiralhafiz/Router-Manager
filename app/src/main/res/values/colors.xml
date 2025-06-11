@@ -2,4 +2,5 @@
 <resources>
     <color name="brand_primary">#6750A4</color>
     <color name="brand_secondary">#03DAC5</color>
+    <color name="launcher_background">#FFFFFF</color>
 </resources>
