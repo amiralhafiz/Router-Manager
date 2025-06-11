@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 
 private const val ROUTER_URL = "https://10.80.80.1/"
+private const val KEY_SSL_TRUSTED = "sslTrusted"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED) ?: false
         setContentView(R.layout.activity_main)
 
         val webView: WebView = findViewById(R.id.routerWebView)
@@ -98,5 +100,10 @@ class MainActivity : AppCompatActivity() {
         refreshButton.setOnClickListener {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_SSL_TRUSTED, sslTrusted)
     }
 }
