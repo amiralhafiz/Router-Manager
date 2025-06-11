@@ -6,6 +6,8 @@ import android.webkit.SslErrorHandler
 import android.net.http.SslError
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebChromeClient
+import android.webkit.JsResult
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
@@ -48,6 +50,21 @@ class MainActivity : AppCompatActivity() {
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         progressBar = findViewById(R.id.loadingProgress)
         webView.webViewClient = RouterWebViewClient()
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onJsAlert(
+                view: WebView?,
+                url: String?,
+                message: String?,
+                result: JsResult?
+            ): Boolean {
+                AlertDialog.Builder(this@MainActivity)
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> result?.confirm() }
+                    .setCancelable(false)
+                    .show()
+                return true
+            }
+        }
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://10.80.80.1/")
         refreshButton.setOnClickListener { webView.reload() }
