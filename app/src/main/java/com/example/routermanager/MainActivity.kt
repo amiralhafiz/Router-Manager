@@ -20,7 +20,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 
-private const val ROUTER_URL = "https://10.80.80.1/"
+private const val KEY_ROUTER_URL = "routerUrl"
+private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
 private const val KEY_SSL_TRUSTED = "sslTrusted"
 
 class MainActivity : AppCompatActivity() {
@@ -81,6 +82,9 @@ class MainActivity : AppCompatActivity() {
         sharedPrefs = getPreferences(MODE_PRIVATE)
         sslTrusted = savedInstanceState?.getBoolean(KEY_SSL_TRUSTED)
             ?: sharedPrefs.getBoolean(KEY_SSL_TRUSTED, false)
+        val settings = getSharedPreferences("settings", MODE_PRIVATE)
+        val routerUrl = settings.getString(KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
+            ?: DEFAULT_ROUTER_URL
         setContentView(R.layout.activity_main)
 
         val webView: WebView = findViewById(R.id.routerWebView)
@@ -129,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
         }
 
-        webView.loadUrl(ROUTER_URL)
+        webView.loadUrl(routerUrl)
 
         refreshButton.setOnClickListener {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
@@ -140,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         homeButton.setOnClickListener {
-            webView.loadUrl(ROUTER_URL)
+            webView.loadUrl(routerUrl)
         }
     }
 

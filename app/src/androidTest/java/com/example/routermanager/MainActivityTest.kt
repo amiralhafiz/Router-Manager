@@ -3,6 +3,7 @@ package com.example.routermanager
 import android.webkit.WebView
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.content.Context
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
@@ -15,6 +16,13 @@ import org.junit.runner.RunWith
 class MainActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @org.junit.Before
+    fun setupPrefs() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs.edit().putString("routerUrl", "https://10.80.80.1/").commit()
+    }
 
     @Test
     fun webViewLoadsExpectedUrl() {
