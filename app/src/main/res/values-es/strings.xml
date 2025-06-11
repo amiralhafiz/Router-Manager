@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RouterManager</string>
+    <string name="app_name">Router Manager</string>
     <string name="router_image_description">Icono del router</string>
     <string name="action_refresh">Actualizar</string>
     <string name="action_speed_test">Prueba de velocidad</string>
