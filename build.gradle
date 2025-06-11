@@ -5,6 +5,8 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.4.2"
+        // Add Kotlin Gradle plugin for Kotlin Android support
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
     }
 }
 
