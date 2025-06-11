@@ -9,11 +9,18 @@ android {
 
     defaultConfig {
         def commitCount = "git rev-list --count HEAD".execute([], rootDir).text.trim().toInteger()
+        def gitSha = "git rev-parse --short HEAD".execute([], rootDir).text.trim()
+
+        def index = commitCount - 1
+        def major = (int) (index / 100)
+        def minor = (int) ((index / 10) % 10)
+        def patch = (int) (index % 10) + 1
+
         applicationId "com.example.routermanager"
         minSdk 21
         targetSdk 35
         versionCode commitCount
-        versionName "1.${commitCount}"
+        versionName "v${major}.${minor.toString().padLeft(2, '0')}.${patch.toString().padLeft(2, '0')}-${gitSha}"
     }
 
     buildTypes {
