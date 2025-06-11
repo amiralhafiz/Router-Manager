@@ -25,8 +25,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.core.view.isVisible
 
-private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
-
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var prefs: SharedPreferences
@@ -127,8 +125,8 @@ class MainActivity : AppCompatActivity() {
         prefs = getSharedPreferences("settings", MODE_PRIVATE)
         sslTrusted = savedInstanceState?.getBoolean(PrefsKeys.KEY_SSL_TRUSTED)
             ?: prefs.getBoolean(PrefsKeys.KEY_SSL_TRUSTED, false)
-        val routerUrl = prefs.getString(PrefsKeys.KEY_ROUTER_URL, DEFAULT_ROUTER_URL)
-            ?: DEFAULT_ROUTER_URL
+        val routerUrl = prefs.getString(PrefsKeys.KEY_ROUTER_URL, "")
+            ?: ""
         setContentView(R.layout.activity_main)
 
         val webView: WebView = findViewById(R.id.routerWebView)
