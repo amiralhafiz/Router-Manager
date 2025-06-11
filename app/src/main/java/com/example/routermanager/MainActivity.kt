@@ -85,6 +85,8 @@ class MainActivity : AppCompatActivity() {
 
         val webView: WebView = findViewById(R.id.routerWebView)
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
+        val speedTestButton: FloatingActionButton = findViewById(R.id.speedTestButton)
+        val homeButton: FloatingActionButton = findViewById(R.id.homeButton)
         progressBar = findViewById(R.id.loadingProgress)
         webView.webViewClient = RouterWebViewClient()
         webView.webChromeClient = object : WebChromeClient() {
@@ -131,6 +133,14 @@ class MainActivity : AppCompatActivity() {
 
         refreshButton.setOnClickListener {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
+        }
+
+        speedTestButton.setOnClickListener {
+            webView.loadUrl("https://unifi-my.speedtestcustom.com/")
+        }
+
+        homeButton.setOnClickListener {
+            webView.loadUrl(ROUTER_URL)
         }
     }
 
