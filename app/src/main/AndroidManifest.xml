@@ -3,6 +3,7 @@
     package="com.example.routermanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".RouterManagerApplication"

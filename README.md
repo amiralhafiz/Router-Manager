@@ -21,7 +21,7 @@ Use the provided Gradle wrapper scripts to build or install the app. On Unix sys
 
 ## Launching the WebView App
 
-After installing the APK on your device, launch the **RouterManager** application. On the first run you'll see the setup screen where you can enter your router's URL and tap **Access**. The WebView automatically loads this saved address on future launches, defaulting to `https://10.80.80.1/` if no value was provided.
+After installing the APK on your device, launch the **RouterManager** application. On the first run you'll see the setup screen where you can enter your router's URL and tap **Access**. The app now attempts to detect your gateway automatically, briefly showing a spinner while the URL field is populated. The WebView automatically loads this saved address on future launches, defaulting to `https://10.80.80.1/` if no value was provided.
 
 You may also open the project in Android Studio and run it directly from there using the built-in Gradle wrapper support.
 
