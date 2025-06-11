@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdk 34
-    namespace "com.example.routermanager"
 
     defaultConfig {
         applicationId "com.example.routermanager"
