@@ -11,6 +11,7 @@ import android.webkit.WebSettings
 import android.webkit.CookieManager
 import androidx.core.content.edit
 import android.view.View
+import androidx.core.view.isVisible
 
 class SpeedTestActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
@@ -37,10 +38,14 @@ class SpeedTestActivity : AppCompatActivity() {
             finish()
         }
         refreshButton.setOnClickListener {
-            webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
+            webView.url?.let { currentUrl ->
+                webView.loadUrl(
+                    currentUrl
+                )
+            }
         }
         toggleFab.setOnClickListener {
-            val visible = buttonContainer.visibility == View.VISIBLE
+            val visible = buttonContainer.isVisible
             if (visible) {
                 buttonContainer.animate()
                     .alpha(0f)

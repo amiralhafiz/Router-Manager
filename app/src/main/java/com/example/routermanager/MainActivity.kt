@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.view.isVisible
 
 private const val DEFAULT_ROUTER_URL = "https://10.80.80.1/"
 
@@ -189,7 +190,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         toggleFab.setOnClickListener {
-            val visible = buttonContainer.visibility == View.VISIBLE
+            val visible = buttonContainer.isVisible
             if (visible) {
                 buttonContainer.animate()
                     .alpha(0f)
