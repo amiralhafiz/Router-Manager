@@ -1,8 +1,3 @@
-Here is your **full `README.md` file**, written from top to bottom with clear structure, professional language, and emphasis on your project's uniqueness — including its AI-assisted development workflow:
-
----
-
-````markdown
 # RouterManager
 
 **RouterManager** is a lightweight Android application that wraps your router’s web management portal inside a native mobile interface using WebView. It automatically detects your router's IP address and provides quick, repeatable access — removing the need to open a browser and manually enter an IP each time.
@@ -65,7 +60,6 @@ Use the Gradle wrapper provided in the project.
 ./gradlew assembleDebug
 ./gradlew installDebug
 ```
-````
 
 ### On Windows:
 
@@ -156,7 +150,5 @@ You are free to use, modify, and distribute the code with proper attribution.
 RouterManager is not intended as a replacement for official router apps or UIs. Instead, it offers a convenient, mobile-optimized wrapper around what already exists — built as a personal-use utility and a **demonstration of AI-enhanced software development**.
 
 Feel free to clone, run, and explore the code. Feedback is welcome!
-
-```
 
 ```
