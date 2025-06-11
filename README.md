@@ -1,6 +1,6 @@
 # RouterManager
 
-RouterManager is a simple Android application that opens a WebView pointing to your router's management interface. By default, the app loads `https://10.80.80.1/`.
+RouterManager is a simple Android application that opens a WebView pointing to your router's management interface. The first time you launch the app you'll be asked to enter the router URL, which is then stored for future sessions. If no value is entered the app falls back to `https://10.80.80.1/`.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Use the provided Gradle wrapper scripts to build or install the app. On Unix sys
 
 ## Launching the WebView App
 
-After installing the APK on your device, launch the **RouterManager** application. The WebView will automatically navigate to `https://10.80.80.1/`, allowing you to interact with the router's web interface.
+After installing the APK on your device, launch the **RouterManager** application. You'll first be presented with a screen to enter your router's URL. Once saved, the WebView will automatically navigate to that address on subsequent launches (defaulting to `https://10.80.80.1/` if none is specified).
 
 You may also open the project in Android Studio and run it directly from there using the built-in Gradle wrapper support.
 
