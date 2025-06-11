@@ -9,6 +9,8 @@ import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
 import android.webkit.JsResult
 import android.webkit.WebSettings
+import android.webkit.CookieManager
+import android.os.Build
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ProgressBar
@@ -73,7 +75,16 @@ class MainActivity : AppCompatActivity() {
             domStorageEnabled = true
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
+
+        CookieManager.getInstance().setAcceptCookie(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
+        }
+
         webView.loadUrl(ROUTER_URL)
-        refreshButton.setOnClickListener { webView.reload() }
+
+        refreshButton.setOnClickListener {
+            webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
+        }
     }
 }
