@@ -8,11 +8,12 @@ android {
     namespace "com.example.routermanager"
 
     defaultConfig {
+        def commitCount = "git rev-list --count HEAD".execute([], rootDir).text.trim().toInteger()
         applicationId "com.example.routermanager"
         minSdk 21
         targetSdk 35
-        versionCode 1
-        versionName "1.0"
+        versionCode commitCount
+        versionName "1.${commitCount}"
     }
 
     buildTypes {
