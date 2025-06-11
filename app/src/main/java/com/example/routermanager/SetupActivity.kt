@@ -30,6 +30,7 @@ class SetupActivity : AppCompatActivity() {
         val accessButton: FloatingActionButton = findViewById(R.id.accessButton)
 
         urlField.isEnabled = false
+        accessButton.isEnabled = false
         progress.visibility = View.VISIBLE
         Thread {
             val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
@@ -40,6 +41,9 @@ class SetupActivity : AppCompatActivity() {
             runOnUiThread {
                 address?.let { urlField.setText("https://$it/") }
                 progress.visibility = View.GONE
+                if (address != null || urlField.text.isNotBlank()) {
+                    accessButton.isEnabled = true
+                }
             }
         }.start()
 
