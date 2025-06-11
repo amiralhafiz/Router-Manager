@@ -23,21 +23,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Back" />
+            app:srcCompat="@android:drawable/ic_menu_revert" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Refresh" />
+            app:srcCompat="@drawable/ic_refresh" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/offButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

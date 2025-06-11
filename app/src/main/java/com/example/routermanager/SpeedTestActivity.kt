@@ -2,7 +2,8 @@ package com.example.routermanager
 
 import android.os.Bundle
 import android.webkit.WebView
-import android.widget.Button
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.webkit.WebSettings
@@ -14,9 +15,9 @@ class SpeedTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_speed_test)
 
         val webView: WebView = findViewById(R.id.speedTestWebView)
-        val backButton: Button = findViewById(R.id.backButton)
-        val refreshButton: Button = findViewById(R.id.refreshButton)
-        val offButton: Button = findViewById(R.id.offButton)
+        val backButton: FloatingActionButton = findViewById(R.id.backButton)
+        val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
+        val offButton: ExtendedFloatingActionButton = findViewById(R.id.offButton)
 
         webView.settings.apply {
             javaScriptEnabled = true
