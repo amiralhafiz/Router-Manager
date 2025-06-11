@@ -27,6 +27,7 @@ import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
+    private lateinit var webView: WebView
     private lateinit var prefs: SharedPreferences
     private var sslTrusted: Boolean = false
     private val pendingSslHandlers = mutableListOf<SslErrorHandler>()
@@ -129,7 +130,7 @@ class MainActivity : AppCompatActivity() {
             ?: ""
         setContentView(R.layout.activity_main)
 
-        val webView: WebView = findViewById(R.id.routerWebView)
+        webView = findViewById(R.id.routerWebView)
         val refreshButton: FloatingActionButton = findViewById(R.id.refreshButton)
         val speedTestButton: FloatingActionButton = findViewById(R.id.speedTestButton)
         val offButton: ExtendedFloatingActionButton = findViewById(R.id.offButton)
@@ -211,6 +212,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        webView.url?.let { webView.loadUrl(it) }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
