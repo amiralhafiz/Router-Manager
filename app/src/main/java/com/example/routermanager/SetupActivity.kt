@@ -2,6 +2,7 @@ package com.example.routermanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,16 @@ class SetupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
         val accessButton: Button = findViewById(R.id.accessButton)
+
+        urlField.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                accessButton.performClick()
+                true
+            } else {
+                false
+            }
+        }
+
         accessButton.setOnClickListener {
             val url = urlField.text.toString().trim()
             val editor = prefs.edit()
