@@ -17,4 +17,5 @@
     <string name="page_load_error_message">Unable to load the router page. Please check the address and try again.</string>
     <string name="action_back_to_setup">Back to Setup</string>
     <string name="hint_router_url">Router URL</string>
+    <string name="version_format">Version %1$s</string>
 </resources>

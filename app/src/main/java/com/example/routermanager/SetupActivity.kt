@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.net.wifi.WifiManager
 import android.text.format.Formatter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,8 +27,10 @@ class SetupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setup)
         val urlField: EditText = findViewById(R.id.urlEditText)
         val progress: ProgressBar = findViewById(R.id.setupProgress)
+        val versionView: TextView = findViewById(R.id.versionTextView)
         urlField.setText(prefs.getString(PrefsKeys.KEY_ROUTER_URL, ""))
         val accessButton: FloatingActionButton = findViewById(R.id.accessButton)
+        versionView.text = getString(R.string.version_format, BuildConfig.VERSION_NAME)
 
         urlField.isEnabled = false
         accessButton.isEnabled = false
