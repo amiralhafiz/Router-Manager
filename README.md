@@ -19,6 +19,14 @@ Use the provided Gradle wrapper scripts to build or install the app. On Unix sys
 ./gradlew installDebug
 ```
 
+## Running Instrumentation Tests
+
+Ensure a device or emulator is connected and run:
+
+```bash
+./gradlew connectedAndroidTest
+```
+
 ## Launching the WebView App
 
 After installing the APK on your device, launch the **RouterManager** application. On the first run you'll see the setup screen while the app automatically scans for your router. The URL field is read-only and will be populated once the gateway is detected. Tap **Access** to continue. The WebView automatically loads this saved address on future launches.
