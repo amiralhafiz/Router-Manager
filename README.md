@@ -6,6 +6,8 @@ RouterManager is a simple Android application that opens a WebView pointing to y
 
 - **Android SDK** – Ensure the Android SDK is installed and that you have an Android device or emulator available.
 - **JDK 17** – The project uses Android Gradle Plugin 8.x which requires JDK 17.
+- **Git** – Required for automatic versioning. If Git isn't available the build
+  falls back to a default version.
 
 ## Building with the Gradle Wrapper
 
@@ -26,6 +28,8 @@ The build script derives version information from Git. It uses
 `git rev-parse --short HEAD` to obtain the short commit hash. The commit
 count becomes the `versionCode` and is split into `major`, `minor` and
 `patch` values.
+If Git cannot be found, the build logs a warning and uses commit count `1` and
+hash `dev`, resulting in a fallback version like `v0.00.01-dev`.
 
 Version names follow the `v<major>.<minor>.<patch>-<git hash>` scheme.
 `patch` increases with each commit and cycles from `01` through `10`. When it
