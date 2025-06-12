@@ -6,6 +6,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.IdlingRegistry
+import android.view.View
+import com.example.routermanager.ViewVisibilityIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.Visibility
@@ -53,15 +56,25 @@ class SpeedTestActivityTest {
 
         onView(withId(R.id.refreshButton)).perform(click())
 
-        Thread.sleep(1000)
-
+        val visibleResource = ViewVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.VISIBLE
+        )
+        IdlingRegistry.getInstance().register(visibleResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        IdlingRegistry.getInstance().unregister(visibleResource)
 
-        Thread.sleep(3000)
-
+        val goneResource = ViewVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.GONE
+        )
+        IdlingRegistry.getInstance().register(goneResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        IdlingRegistry.getInstance().unregister(goneResource)
     }
 }
 
