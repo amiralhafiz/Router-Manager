@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.net.wifi.WifiManager
+import android.net.ConnectivityManager
+import android.os.Build
 import java.net.InetAddress
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -46,13 +48,24 @@ class SetupActivity : AppCompatActivity() {
         progress.visibility = View.VISIBLE
         lifecycleScope.launch {
             val address = withContext(Dispatchers.IO) {
-                val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
-                wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let { gateway ->
-                    val bytes = ByteBuffer.allocate(4)
-                        .order(ByteOrder.LITTLE_ENDIAN)
-                        .putInt(gateway)
-                        .array()
-                    InetAddress.getByAddress(bytes).hostAddress
+                val connectivity = applicationContext.getSystemService(CONNECTIVITY_SERVICE) as? ConnectivityManager
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    val network = connectivity?.activeNetwork
+                    connectivity?.getLinkProperties(network)
+                        ?.routes
+                        ?.firstOrNull { it.isDefaultRoute }
+                        ?.gateway
+                        ?.hostAddress
+                } else {
+                    val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
+                    @Suppress("DEPRECATION")
+                    wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let { gateway ->
+                        val bytes = ByteBuffer.allocate(4)
+                            .order(ByteOrder.LITTLE_ENDIAN)
+                            .putInt(gateway)
+                            .array()
+                        InetAddress.getByAddress(bytes).hostAddress
+                    }
                 }
             }
             val scheme = withContext(Dispatchers.IO) {

@@ -161,7 +161,6 @@ class MainActivity : AppCompatActivity() {
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok) { _, _ ->
                         result?.confirm()
-                        webView.postDelayed({ webView.reload() }, 500)
                     }
                     .setNegativeButton(android.R.string.cancel) { _, _ -> result?.cancel() }
                     .setCancelable(false)
