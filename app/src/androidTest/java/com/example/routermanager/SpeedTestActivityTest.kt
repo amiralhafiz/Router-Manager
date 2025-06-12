@@ -8,6 +8,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.Visibility
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import com.example.routermanager.SpeedTester
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,6 +61,29 @@ class SpeedTestActivityTest {
 
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
+    }
+
+    @Test
+    fun progressBarHidesAndErrorShownOnFailure() {
+        activityRule.scenario.onActivity { activity ->
+            activity.tester = object : SpeedTester {
+                override suspend fun downloadSpeed(
+                    url: String,
+                    onProgress: (Int) -> Unit,
+                ): Double {
+                    throw RuntimeException("boom")
+                }
+            }
+        }
+
+        onView(withId(R.id.runTestButton)).perform(click())
+
+        Thread.sleep(1000)
+
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        onView(withId(R.id.downloadText))
+            .check(matches(withText(R.string.speed_test_failed)))
     }
 }
 

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +17,7 @@ import kotlinx.coroutines.launch
 class SpeedTestActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var downloadText: TextView
-    private val tester = NetworkSpeedTester()
+    internal var tester: SpeedTester = NetworkSpeedTester()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +46,22 @@ class SpeedTestActivity : AppCompatActivity() {
         progressBar.progress = 0
         downloadText.text = getString(R.string.loading)
         lifecycleScope.launch {
-            val mbps = tester.downloadSpeed(TEST_FILE_URL) { percent ->
-                progressBar.progress = percent
+            try {
+                val mbps = tester.downloadSpeed(TEST_FILE_URL) { percent ->
+                    progressBar.progress = percent
+                }
+                progressBar.visibility = View.GONE
+                downloadText.text = getString(R.string.download_speed_format, mbps)
+            } catch (e: Exception) {
+                Log.e("SpeedTestActivity", "Speed test failed", e)
+                progressBar.visibility = View.GONE
+                downloadText.text = getString(R.string.speed_test_failed)
+                Toast.makeText(
+                    this@SpeedTestActivity,
+                    R.string.speed_test_failed,
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            progressBar.visibility = View.GONE
-            downloadText.text = getString(R.string.download_speed_format, mbps)
         }
     }
 
