@@ -3,8 +3,6 @@ package com.example.routermanager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import java.net.InetSocketAddress
-import java.net.Socket
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -71,8 +69,8 @@ class SetupActivity : AppCompatActivity() {
             val scheme = withContext(Dispatchers.IO) {
                 address?.let {
                     when {
-                        isPortOpen(it, 80, 200) -> "http://"
-                        isPortOpen(it, 443, 200) -> "https://"
+                        NetworkUtils.isPortOpen(it, 80, 200) -> "http://"
+                        NetworkUtils.isPortOpen(it, 443, 200) -> "https://"
                         else -> "http://"
                     }
                 }
@@ -102,13 +100,3 @@ class SetupActivity : AppCompatActivity() {
     }
 }
 
-private fun isPortOpen(host: String, port: Int, timeoutMs: Int): Boolean {
-    return try {
-        Socket().use { socket ->
-            socket.connect(InetSocketAddress(host, port), timeoutMs)
-        }
-        true
-    } catch (_: Exception) {
-        false
-    }
-}
