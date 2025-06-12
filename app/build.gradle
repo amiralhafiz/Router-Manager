@@ -8,18 +8,16 @@ android {
     namespace "com.example.routermanager"
 
     defaultConfig {
-        def commitCount
-        def gitSha
-        try {
-            commitCount = "git rev-list --count HEAD".execute([], rootDir).text.trim().toInteger()
-            gitSha = "git rev-parse --short HEAD".execute([], rootDir).text.trim()
-        } catch (Exception e) {
-            logger.warn("Git info not available, using default version values")
-            commitCount = 1
-            gitSha = 'dev'
-        }
+        def commitCount = providers.exec {
+            commandLine 'git', 'rev-list', '--count', 'HEAD'
+        }.standardOutput.asText.map { it.trim().toInteger() }
 
-        def index = commitCount - 1
+        def gitSha = providers.exec {
+            commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        }.standardOutput.asText.map { it.trim() }
+
+        def count = commitCount.getOrElse(1)
+        def index = count - 1
         def major = index.intdiv(100)
         def minor = index.intdiv(10) % 10
         def patch = index % 10 + 1
@@ -27,8 +25,8 @@ android {
         applicationId "com.example.routermanager"
         minSdk 21
         targetSdk 35
-        versionCode commitCount
-        versionName "v${major}.${minor.toString().padLeft(2, '0')}.${patch.toString().padLeft(2, '0')}-${gitSha}"
+        versionCode count
+        versionName "v${major}.${minor.toString().padLeft(2, '0')}.${patch.toString().padLeft(2, '0')}-${gitSha.getOrElse('dev')}"
     }
 
     buildTypes {
