@@ -24,12 +24,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.routermanager.BuildConfig
 
-const val EXTRA_FORCE_SETUP = "forceSetup"
 
 class SetupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val forceSetup = intent.getBooleanExtra(EXTRA_FORCE_SETUP, false)
+        val forceSetup = intent.getBooleanExtra(Constants.EXTRA_FORCE_SETUP, false)
         val prefs = getSharedPreferences("settings", MODE_PRIVATE)
         if (!forceSetup && prefs.contains(PrefsKeys.KEY_ROUTER_URL)) {
             startActivity(Intent(this, MainActivity::class.java))
