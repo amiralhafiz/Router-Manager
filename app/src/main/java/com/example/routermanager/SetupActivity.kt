@@ -72,8 +72,8 @@ class SetupActivity : AppCompatActivity() {
             val scheme = withContext(Dispatchers.IO) {
                 address?.let {
                     when {
-                        isPortOpen(it, 443, 200) -> "https://"
                         isPortOpen(it, 80, 200) -> "http://"
+                        isPortOpen(it, 443, 200) -> "https://"
                         else -> "http://"
                     }
                 }
