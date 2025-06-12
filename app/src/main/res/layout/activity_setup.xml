@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_router_url"
         android:singleLine="true"
+        android:inputType="textUri"
         android:imeOptions="actionDone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
