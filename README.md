@@ -125,6 +125,16 @@ Ensure a device or emulator is connected.
 
 ---
 
+## 📚 Speed Test Library
+
+The built-in speed test uses the open source [speed-test-lib](https://github.com/bertrandmartel/speed-test-lib) library.
+It is included via [JitPack](https://jitpack.io) and provides the `SpeedTestSocket` class whose callbacks report progress,
+completion and errors. RouterManager hooks into these events to update the UI and display the measured download speed.
+
+The library is released under the Apache 2.0 license.
+
+---
+
 ## 🔒 Permissions
 
 RouterManager requires the following permissions to detect your router's gateway IP and access the web interface:
@@ -150,6 +160,7 @@ No personal data is collected or transmitted.
 
 This project is licensed under the [Personal Use License](LICENSE).
 You are free to use and modify the code for non-commercial purposes with proper attribution.
+The included `speed-test-lib` dependency is licensed under Apache 2.0.
 
 ---
 

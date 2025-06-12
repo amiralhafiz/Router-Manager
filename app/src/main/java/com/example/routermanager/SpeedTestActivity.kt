@@ -8,17 +8,19 @@ import android.widget.TextView
 import android.widget.Toast
 import android.util.Log
 import com.example.routermanager.BuildConfig
+import fr.bmartel.speedtest.SpeedTestReport
+import fr.bmartel.speedtest.SpeedTestSocket
+import fr.bmartel.speedtest.inter.ISpeedTestListener
+import fr.bmartel.speedtest.model.SpeedTestError
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.launch
 
 class SpeedTestActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var downloadText: TextView
-    internal var tester: SpeedTester = NetworkSpeedTester()
+    private val socket = SpeedTestSocket()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,24 +48,34 @@ class SpeedTestActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         progressBar.progress = 0
         downloadText.text = getString(R.string.loading)
-        lifecycleScope.launch {
-            try {
-                val mbps = tester.downloadSpeed(TEST_FILE_URL) { percent ->
-                    progressBar.progress = percent
+
+        val listener = object : ISpeedTestListener {
+            override fun onProgress(percent: Float, report: SpeedTestReport) {
+                runOnUiThread { progressBar.progress = percent.toInt() }
+            }
+
+            override fun onCompletion(report: SpeedTestReport) {
+                socket.removeSpeedTestListener(this)
+                runOnUiThread {
+                    progressBar.visibility = View.GONE
+                    val mbps = report.transferRateBit.toDouble() / 1_000_000
+                    downloadText.text = getString(R.string.download_speed_format, mbps)
                 }
-                progressBar.visibility = View.GONE
-                downloadText.text = getString(R.string.download_speed_format, mbps)
-            } catch (e: Exception) {
-                Log.e("SpeedTestActivity", "Speed test failed", e)
-                progressBar.visibility = View.GONE
-                downloadText.text = getString(R.string.speed_test_failed)
-                Toast.makeText(
-                    this@SpeedTestActivity,
-                    R.string.speed_test_failed,
-                    Toast.LENGTH_LONG
-                ).show()
+            }
+
+            override fun onError(speedTestError: SpeedTestError, errorMessage: String) {
+                socket.removeSpeedTestListener(this)
+                runOnUiThread {
+                    Log.e("SpeedTestActivity", "Speed test failed: $errorMessage")
+                    progressBar.visibility = View.GONE
+                    downloadText.text = getString(R.string.speed_test_failed)
+                    Toast.makeText(this@SpeedTestActivity, R.string.speed_test_failed, Toast.LENGTH_LONG).show()
+                }
             }
         }
+
+        socket.addSpeedTestListener(listener)
+        socket.startDownload(TEST_FILE_URL)
     }
 
     companion object {
