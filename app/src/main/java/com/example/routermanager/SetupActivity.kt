@@ -7,7 +7,9 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.net.wifi.WifiManager
-import android.text.format.Formatter
+import java.net.InetAddress
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -43,9 +45,12 @@ class SetupActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val address = withContext(Dispatchers.IO) {
                 val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
-                wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let {
-                    @Suppress("DEPRECATION")
-                    Formatter.formatIpAddress(it)
+                wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let { gateway ->
+                    val bytes = ByteBuffer.allocate(4)
+                        .order(ByteOrder.LITTLE_ENDIAN)
+                        .putInt(gateway)
+                        .array()
+                    InetAddress.getByAddress(bytes).hostAddress
                 }
             }
             withContext(Dispatchers.Main) {
