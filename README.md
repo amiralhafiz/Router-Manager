@@ -120,6 +120,7 @@ Ensure a device or emulator is connected.
 4. The router IP is saved for future launches.
 5. Tap **Access** to open the WebView.
 6. Open the menu and tap **Run Test** to measure your network speed.
+   The test downloads a small file from `https://speed.hetzner.de/10MB.bin`.
 7. Use the **Off** button to reset the saved address and re-trigger detection.
 
 ---

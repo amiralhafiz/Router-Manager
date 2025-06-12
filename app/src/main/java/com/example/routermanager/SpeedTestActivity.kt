@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import android.util.Log
+import com.example.routermanager.BuildConfig
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
@@ -66,6 +67,6 @@ class SpeedTestActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TEST_FILE_URL = "https://speed.hetzner.de/100MB.bin"
+        private const val TEST_FILE_URL = BuildConfig.TEST_FILE_URL
     }
 }

@@ -27,6 +27,7 @@ android {
         targetSdk 35
         versionCode count
         versionName "v${major}.${minor.toString().padLeft(2, '0')}.${patch.toString().padLeft(2, '0')}-${gitSha.getOrElse('dev')}"
+        buildConfigField "String", "TEST_FILE_URL", '"https://speed.hetzner.de/10MB.bin"'
     }
 
     buildTypes {
