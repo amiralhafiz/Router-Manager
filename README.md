@@ -132,7 +132,7 @@ Ensure a device or emulator is connected.
 5. Tap **Access** to open the WebView.
 6. Use the **Off** button to reset the saved address and re-trigger detection.
 
-By default the app blocks cleartext (HTTP) traffic. If your router's admin page only supports HTTP, edit `app/src/main/res/xml/network_security_config.xml` to permit the private address ranges used by most routers:
+By default the app **permits cleartext (HTTP) traffic** so it can communicate with routers that don't support HTTPS. If you'd rather restrict cleartext access, edit `app/src/main/res/xml/network_security_config.xml` to allow only local networks:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -147,7 +147,7 @@ By default the app blocks cleartext (HTTP) traffic. If your router's admin page 
 </network-security-config>
 ```
 
-This enables HTTP access for devices with addresses starting with `10.*`,
+This restricts HTTP access to devices with addresses starting with `10.*`,
 `172.16.*`–`172.31.*`, or `192.168.*`.
 
 ---
