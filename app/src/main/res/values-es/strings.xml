@@ -18,4 +18,5 @@
     <string name="action_back_to_setup">Volver a configuración</string>
     <string name="hint_router_url">URL del router</string>
     <string name="version_format">Versión %1$s</string>
+    <string name="loading">Cargando...</string>
 </resources>
