@@ -21,6 +21,11 @@
 /build/
 **/build/
 
+# Build output metadata and baseline profiles
+/app/debug/output-metadata.json
+/app/release/output-metadata.json
+/app/release/baselineProfiles/
+
 # Local configuration file (sdk path, etc)
 local.properties
 
