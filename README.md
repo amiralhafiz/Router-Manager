@@ -134,8 +134,8 @@ RouterManager may require network access permissions to detect your router's gat
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).  
-You are free to use, modify, and distribute the code with proper attribution.
+This project is licensed under the [Personal Use License](LICENSE).
+You are free to use and modify the code for non-commercial purposes with proper attribution.
 
 ---
 
