@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
             .setMessage(getString(R.string.page_load_error_message))
             .setPositiveButton(getString(R.string.action_back_to_setup)) { _, _ ->
                 val intent = Intent(this, SetupActivity::class.java)
-                intent.putExtra(EXTRA_FORCE_SETUP, true)
+                intent.putExtra(Constants.EXTRA_FORCE_SETUP, true)
                 startActivity(intent)
                 finish()
             }
@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 .setNegativeButton(getString(R.string.action_cancel)) { _, _ ->
                     val intent = Intent(this, SetupActivity::class.java)
-                    intent.putExtra(EXTRA_FORCE_SETUP, true)
+                    intent.putExtra(Constants.EXTRA_FORCE_SETUP, true)
                     startActivity(intent)
                     finish()
                 }
