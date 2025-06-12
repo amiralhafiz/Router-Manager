@@ -124,7 +124,13 @@ Ensure a device or emulator is connected.
 
 ## 🔒 Permissions
 
-RouterManager may require network access permissions to detect your router's gateway IP. No personal data is collected or transmitted.
+RouterManager requires the following permissions to detect your router's gateway IP and access the web interface:
+
+- `INTERNET`
+- `ACCESS_WIFI_STATE`
+- `ACCESS_NETWORK_STATE`
+
+No personal data is collected or transmitted.
 
 ---
 
