@@ -177,7 +177,23 @@ class MainActivity : AppCompatActivity() {
             CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
         }
 
-        webView.loadUrl(routerUrl)
+        if (routerUrl.startsWith("https://") && !sslTrusted) {
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.ssl_certificate_error_title))
+                .setMessage(getString(R.string.ssl_certificate_error_message))
+                .setPositiveButton(getString(R.string.action_continue)) { _, _ ->
+                    sslTrusted = true
+                    prefs.edit { putBoolean(PrefsKeys.KEY_SSL_TRUSTED, true) }
+                    webView.loadUrl(routerUrl)
+                }
+                .setNegativeButton(getString(R.string.action_cancel)) { _, _ ->
+                    finish()
+                }
+                .setCancelable(false)
+                .show()
+        } else {
+            webView.loadUrl(routerUrl)
+        }
 
         refreshButton.setOnClickListener {
             webView.url?.let { currentUrl -> webView.loadUrl(currentUrl) }
@@ -196,11 +212,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        webView.url?.let { webView.loadUrl(it) }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
