@@ -45,5 +45,23 @@ class SpeedTestActivityTest {
         onView(withId(R.id.buttonContainer))
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
     }
+
+    @Test
+    fun progressBarTogglesOnPageLoad() {
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+
+        onView(withId(R.id.refreshButton)).perform(click())
+
+        Thread.sleep(1000)
+
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+
+        Thread.sleep(3000)
+
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+    }
 }
 
