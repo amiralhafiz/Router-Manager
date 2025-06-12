@@ -13,7 +13,7 @@ open class BaseWebViewActivity : AppCompatActivity() {
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         }
         CookieManager.getInstance().setAcceptCookie(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

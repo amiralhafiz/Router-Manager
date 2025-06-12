@@ -15,6 +15,7 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebSettings
 import android.widget.ProgressBar
 import com.example.routermanager.BaseWebViewActivity
 import androidx.core.content.edit
@@ -166,6 +167,10 @@ class MainActivity : BaseWebViewActivity() {
             }
         }
         applyCommonWebViewSettings(webView)
+        if (routerUrl.startsWith("https://")) {
+            webView.settings.mixedContentMode =
+                WebSettings.MIXED_CONTENT_NEVER_ALLOW
+        }
 
         if (routerUrl.startsWith("https://") && !sslTrusted) {
             AlertDialog.Builder(this)
