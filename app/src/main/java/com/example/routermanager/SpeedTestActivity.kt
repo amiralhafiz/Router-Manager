@@ -11,7 +11,6 @@ import android.webkit.WebSettings
 import android.webkit.CookieManager
 import androidx.core.content.edit
 import android.view.View
-import androidx.core.view.isVisible
 
 class SpeedTestActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
@@ -45,22 +44,7 @@ class SpeedTestActivity : AppCompatActivity() {
             }
         }
         toggleFab.setOnClickListener {
-            val visible = buttonContainer.isVisible
-            if (visible) {
-                buttonContainer.animate()
-                    .alpha(0f)
-                    .setDuration(200)
-                    .withEndAction { buttonContainer.visibility = View.GONE }
-                    .start()
-                toggleFab.setImageResource(android.R.drawable.ic_menu_more)
-                toggleFab.contentDescription = getString(R.string.action_expand)
-            } else {
-                buttonContainer.alpha = 0f
-                buttonContainer.visibility = View.VISIBLE
-                buttonContainer.animate().alpha(1f).setDuration(200).start()
-                toggleFab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
-                toggleFab.contentDescription = getString(R.string.action_collapse)
-            }
+            toggleButtonContainer(buttonContainer, toggleFab)
         }
         offButton.setOnClickListener {
             getSharedPreferences("settings", MODE_PRIVATE).edit { clear() }
