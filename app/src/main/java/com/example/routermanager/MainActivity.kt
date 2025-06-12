@@ -189,6 +189,9 @@ class MainActivity : AppCompatActivity() {
                     webView.loadUrl(routerUrl)
                 }
                 .setNegativeButton(getString(R.string.action_cancel)) { _, _ ->
+                    val intent = Intent(this, SetupActivity::class.java)
+                    intent.putExtra(EXTRA_FORCE_SETUP, true)
+                    startActivity(intent)
                     finish()
                 }
                 .setCancelable(false)
