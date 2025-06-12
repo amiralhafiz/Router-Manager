@@ -3,6 +3,8 @@ package com.example.routermanager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import java.net.InetSocketAddress
+import java.net.Socket
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -53,8 +55,18 @@ class SetupActivity : AppCompatActivity() {
                     InetAddress.getByAddress(bytes).hostAddress
                 }
             }
+            val scheme = withContext(Dispatchers.IO) {
+                address?.let {
+                    when {
+                        isPortOpen(it, 443, 200) -> "https://"
+                        isPortOpen(it, 80, 200) -> "http://"
+                        else -> "http://"
+                    }
+                }
+            }
             withContext(Dispatchers.Main) {
-                address?.let { urlField.setText("https://$it/") }
+                urlField.isEnabled = true
+                address?.let { urlField.setText("${scheme ?: "http://"}$it/") }
                 progress.visibility = View.GONE
                 if (address != null || urlField.text.isNotBlank()) {
                     accessButton.isEnabled = true
@@ -74,5 +86,16 @@ class SetupActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+    }
+}
+
+private fun isPortOpen(host: String, port: Int, timeoutMs: Int): Boolean {
+    return try {
+        Socket().use { socket ->
+            socket.connect(InetSocketAddress(host, port), timeoutMs)
+        }
+        true
+    } catch (_: Exception) {
+        false
     }
 }
