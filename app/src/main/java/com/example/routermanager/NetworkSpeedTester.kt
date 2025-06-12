@@ -25,7 +25,9 @@ class NetworkSpeedTester(private val client: OkHttpClient = OkHttpClient()) {
                     bytesRead += read
                     if (length > 0) {
                         val percent = (bytesRead * 100 / length).toInt()
-                        onProgress(percent)
+                        withContext(Dispatchers.Main) {
+                            onProgress(percent)
+                        }
                     }
                 }
                 val time = (System.nanoTime() - start) / 1_000_000_000.0
