@@ -36,3 +36,7 @@
     public static *** d(...);
     public static *** v(...);
 }
+
+-assumenosideeffects class kotlinx.coroutines.DebugProbesKt {
+    public static void install();
+}
