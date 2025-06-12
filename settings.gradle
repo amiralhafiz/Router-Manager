@@ -1,2 +1,2 @@
-rootProject.name = "RouterManager"
+rootProject.name = "Router Manager"
 include(":app")
