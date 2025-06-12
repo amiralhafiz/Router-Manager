@@ -27,7 +27,7 @@ class SetupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val forceSetup = intent.getBooleanExtra(Constants.EXTRA_FORCE_SETUP, false)
-        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        val prefs = settingsPrefs
         if (!forceSetup && prefs.contains(PrefsKeys.KEY_ROUTER_URL)) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()

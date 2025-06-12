@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        prefs = settingsPrefs
         sslTrusted = savedInstanceState?.getBoolean(PrefsKeys.KEY_SSL_TRUSTED)
             ?: prefs.getBoolean(PrefsKeys.KEY_SSL_TRUSTED, false)
         val routerUrl = prefs.getString(PrefsKeys.KEY_ROUTER_URL, "")
