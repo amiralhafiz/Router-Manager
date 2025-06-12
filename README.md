@@ -42,6 +42,18 @@ Before building or running the project, ensure the following are installed:
 - **JDK 17** (required for Android Gradle Plugin 8.x)
 - **Git** (for automatic versioning - fallback supported if missing)
 
+### Configure Android SDK path
+
+Create a `local.properties` file in the project root containing:
+
+```ini
+sdk.dir=/path/to/Android/Sdk
+```
+
+Alternatively, set the `ANDROID_SDK_ROOT` environment variable.
+
+`local.properties` is already listed in `.gitignore` and should not be committed.
+
 ---
 
 ## 🛠️ Building the App
