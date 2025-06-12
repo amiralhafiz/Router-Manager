@@ -6,25 +6,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.http.SslError
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.webkit.CookieManager
 import android.webkit.JsResult
 import android.webkit.SslErrorHandler
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
+import com.example.routermanager.BaseWebViewActivity
 import androidx.core.content.edit
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseWebViewActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var webView: WebView
     private lateinit var prefs: SharedPreferences
@@ -168,16 +165,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
-        webView.settings.apply {
-            javaScriptEnabled = true
-            domStorageEnabled = true
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        }
-
-        CookieManager.getInstance().setAcceptCookie(true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
-        }
+        applyCommonWebViewSettings(webView)
 
         if (routerUrl.startsWith("https://") && !sslTrusted) {
             AlertDialog.Builder(this)

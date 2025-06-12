@@ -8,16 +8,15 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceError
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import androidx.appcompat.app.AppCompatActivity
+import com.example.routermanager.BaseWebViewActivity
 import android.content.Intent
-import android.webkit.WebSettings
-import android.webkit.CookieManager
+
 import androidx.core.content.edit
 import android.view.View
 import android.widget.ProgressBar
 import android.graphics.Bitmap
 
-class SpeedTestActivity : AppCompatActivity() {
+class SpeedTestActivity : BaseWebViewActivity() {
     private lateinit var progressBar: ProgressBar
 
     private inner class SpeedTestWebViewClient : WebViewClient() {
@@ -56,13 +55,7 @@ class SpeedTestActivity : AppCompatActivity() {
         val toggleFab: FloatingActionButton = findViewById(R.id.toggleFab)
 
         webView.webViewClient = SpeedTestWebViewClient()
-
-        webView.settings.apply {
-            javaScriptEnabled = true
-            domStorageEnabled = true
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        }
-        CookieManager.getInstance().setAcceptCookie(true)
+        applyCommonWebViewSettings(webView)
         webView.loadUrl(/* url = */ "https://www.speedtest.net/")
 
         backButton.setOnClickListener {
