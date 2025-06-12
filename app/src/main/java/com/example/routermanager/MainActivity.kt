@@ -159,7 +159,10 @@ class MainActivity : AppCompatActivity() {
             ): Boolean {
                 AlertDialog.Builder(this@MainActivity)
                     .setMessage(message)
-                    .setPositiveButton(android.R.string.ok) { _, _ -> result?.confirm() }
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        result?.confirm()
+                        webView.reload()
+                    }
                     .setNegativeButton(android.R.string.cancel) { _, _ -> result?.cancel() }
                     .setCancelable(false)
                     .show()
