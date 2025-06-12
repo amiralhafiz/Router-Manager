@@ -79,7 +79,7 @@ class SetupActivity : AppCompatActivity() {
                 }
             }
             withContext(Dispatchers.Main) {
-                urlField.isEnabled = true
+                // Keep the URL field read‑only after network detection completes
                 address?.let { urlField.setText("${scheme ?: "http://"}$it/") }
                 progress.visibility = View.GONE
                 if (address != null || urlField.text.isNotBlank()) {
