@@ -4,8 +4,6 @@
     <string name="router_image_description">Router icon</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_speed_test">Speed Test</string>
-    <string name="action_run_test">Run Test</string>
-    <string name="download_speed_format">Download: %.2f Mbps</string>
     <string name="action_access">Access</string>
     <string name="action_back">Back</string>
     <string name="action_power_off">Power Off</string>
@@ -21,5 +19,4 @@
     <string name="hint_router_url">Router URL</string>
     <string name="version_format">Version %1$s</string>
     <string name="loading">Loading...</string>
-    <string name="speed_test_failed">Speed test failed</string>
 </resources>
