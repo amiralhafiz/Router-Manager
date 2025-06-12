@@ -79,7 +79,7 @@ class SpeedTestActivity : AppCompatActivity() {
             toggleButtonContainer(buttonContainer, toggleFab)
         }
         offButton.setOnClickListener {
-            getSharedPreferences("settings", MODE_PRIVATE).edit { clear() }
+            settingsPrefs.edit { clear() }
             startActivity(Intent(this, SetupActivity::class.java))
             finish()
         }
