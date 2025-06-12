@@ -11,6 +11,10 @@ import android.text.format.Formatter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.example.routermanager.BuildConfig
 
 const val EXTRA_FORCE_SETUP = "forceSetup"
@@ -36,20 +40,22 @@ class SetupActivity : AppCompatActivity() {
         urlField.isEnabled = false
         accessButton.isEnabled = false
         progress.visibility = View.VISIBLE
-        Thread {
-            val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
-            val address = wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let {
-                @Suppress("DEPRECATION")
-                Formatter.formatIpAddress(it)
+        lifecycleScope.launch {
+            val address = withContext(Dispatchers.IO) {
+                val wifi = applicationContext.getSystemService(WIFI_SERVICE) as? WifiManager
+                wifi?.dhcpInfo?.gateway?.takeIf { it != 0 }?.let {
+                    @Suppress("DEPRECATION")
+                    Formatter.formatIpAddress(it)
+                }
             }
-            runOnUiThread {
+            withContext(Dispatchers.Main) {
                 address?.let { urlField.setText("https://$it/") }
                 progress.visibility = View.GONE
                 if (address != null || urlField.text.isNotBlank()) {
                     accessButton.isEnabled = true
                 }
             }
-        }.start()
+        }
 
         accessButton.setOnClickListener {
             val url = urlField.text.toString().trim()
