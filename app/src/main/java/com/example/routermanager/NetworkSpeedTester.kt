@@ -9,8 +9,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class NetworkSpeedTester(private val client: OkHttpClient = OkHttpClient()) {
-    suspend fun downloadSpeed(url: String, onProgress: (Int) -> Unit): Double =
+class NetworkSpeedTester(private val client: OkHttpClient = OkHttpClient()) : SpeedTester {
+    override suspend fun downloadSpeed(url: String, onProgress: (Int) -> Unit): Double =
         withContext(Dispatchers.IO) {
             val request = Request.Builder().url(url).build()
             client.newCall(request).execute().use { response ->
