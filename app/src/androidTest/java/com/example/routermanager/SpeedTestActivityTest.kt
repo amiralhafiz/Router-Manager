@@ -1,15 +1,21 @@
 package com.example.routermanager
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.view.View
+import androidx.annotation.IdRes
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.Visibility
+import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.routermanager.SpeedTester
+import kotlinx.coroutines.delay
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +25,13 @@ class SpeedTestActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(SpeedTestActivity::class.java)
 
+    @org.junit.Before
+    fun setUp() {
+        activityRule.scenario.onActivity { activity ->
+            activity.tester = FakeSpeedTester()
+        }
+    }
+
     @Test
     fun runButtonShowsProgress() {
         onView(withId(R.id.loadingProgress))
@@ -26,10 +39,25 @@ class SpeedTestActivityTest {
 
         onView(withId(R.id.runTestButton)).perform(click())
 
-        Thread.sleep(1000)
-
+        val showResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.VISIBLE
+        )
+        IdlingRegistry.getInstance().register(showResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        IdlingRegistry.getInstance().unregister(showResource)
+
+        val hideResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.GONE
+        )
+        IdlingRegistry.getInstance().register(hideResource)
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        IdlingRegistry.getInstance().unregister(hideResource)
     }
 
     @Test
@@ -52,38 +80,93 @@ class SpeedTestActivityTest {
     fun progressBarHidesAfterTestCompletes() {
         onView(withId(R.id.runTestButton)).perform(click())
 
-        Thread.sleep(1000)
-
+        val showResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.VISIBLE
+        )
+        IdlingRegistry.getInstance().register(showResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        IdlingRegistry.getInstance().unregister(showResource)
 
-        Thread.sleep(5000)
-
+        val hideResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.GONE
+        )
+        IdlingRegistry.getInstance().register(hideResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        IdlingRegistry.getInstance().unregister(hideResource)
     }
 
     @Test
     fun progressBarHidesAndErrorShownOnFailure() {
         activityRule.scenario.onActivity { activity ->
-            activity.tester = object : SpeedTester {
-                override suspend fun downloadSpeed(
-                    url: String,
-                    onProgress: (Int) -> Unit,
-                ): Double {
-                    throw RuntimeException("boom")
-                }
-            }
+            activity.tester = FakeSpeedTester(shouldFail = true)
         }
 
         onView(withId(R.id.runTestButton)).perform(click())
 
-        Thread.sleep(1000)
-
+        val hideResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.GONE
+        )
+        IdlingRegistry.getInstance().register(hideResource)
         onView(withId(R.id.loadingProgress))
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        IdlingRegistry.getInstance().unregister(hideResource)
+
         onView(withId(R.id.downloadText))
             .check(matches(withText(R.string.speed_test_failed)))
+    }
+}
+
+private class FakeSpeedTester(
+    private val shouldFail: Boolean = false
+) : SpeedTester {
+    override suspend fun downloadSpeed(
+        url: String,
+        onProgress: (Int) -> Unit,
+    ): Double {
+        delay(100)
+        onProgress(50)
+        delay(100)
+        if (shouldFail) {
+            throw RuntimeException("boom")
+        }
+        onProgress(100)
+        return 42.0
+    }
+}
+
+private class ProgressVisibilityIdlingResource(
+    private val scenario: ActivityScenario<*>,
+    @IdRes private val viewId: Int,
+    private val expectedVisibility: Int,
+) : IdlingResource {
+    @Volatile
+    private var callback: IdlingResource.ResourceCallback? = null
+
+    override fun getName(): String =
+        "ProgressVisibilityIdlingResource:$viewId:$expectedVisibility"
+
+    override fun isIdleNow(): Boolean {
+        var idle = false
+        scenario.onActivity { activity ->
+            val view = activity.findViewById<View>(viewId)
+            idle = view.visibility == expectedVisibility
+        }
+        if (idle) {
+            callback?.onTransitionToIdle()
+        }
+        return idle
+    }
+
+    override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback?) {
+        this.callback = callback
     }
 }
 
