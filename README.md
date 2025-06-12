@@ -93,6 +93,11 @@ v0.01.01-ghi789
 ```
 
 ---
+## 🔒 ProGuard & Release Builds
+
+Release builds can be minified with ProGuard. The rules in `app/proguard-rules.pro` keep WebView classes, Kotlin coroutines and Material dynamic color utilities while stripping debug logs.
+Minification is disabled by default so `assembleRelease` works out of the box.
+
 
 ## ✅ Running Instrumentation Tests
 
