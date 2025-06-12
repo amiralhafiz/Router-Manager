@@ -30,6 +30,7 @@ Not all routers come with official mobile apps. Most rely on outdated web portal
 - ✅ Loads the web interface in a secure WebView
 - ✅ "Off" button to reset stored IP
 - ✅ Simple and intuitive interface
+- ✅ Built-in network speed test
 
 ---
 
@@ -118,7 +119,8 @@ Ensure a device or emulator is connected.
 3. On first run, the app scans your local network and auto-detects your router’s IP.
 4. The router IP is saved for future launches.
 5. Tap **Access** to open the WebView.
-6. Use the **Off** button to reset the saved address and re-trigger detection.
+6. Open the menu and tap **Run Test** to measure your network speed.
+7. Use the **Off** button to reset the saved address and re-trigger detection.
 
 ---
 
