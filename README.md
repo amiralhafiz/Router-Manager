@@ -30,7 +30,6 @@ Not all routers come with official mobile apps. Most rely on outdated web portal
 - ✅ Loads the web interface in a secure WebView
 - ✅ "Off" button to reset stored IP
 - ✅ Simple and intuitive interface
-- ✅ Built-in network speed test
 
 ---
 
@@ -119,19 +118,7 @@ Ensure a device or emulator is connected.
 3. On first run, the app scans your local network and auto-detects your router’s IP.
 4. The router IP is saved for future launches.
 5. Tap **Access** to open the WebView.
-6. Open the menu and tap **Run Test** to measure your network speed.
-   The test downloads a small file from `https://speed.hetzner.de/10MB.bin`.
-7. Use the **Off** button to reset the saved address and re-trigger detection.
-
----
-
-## 📚 Speed Test Library
-
-The built-in speed test uses the open source [speed-test-lib](https://github.com/bertrandmartel/speed-test-lib) library.
-It is included via [JitPack](https://jitpack.io) and provides the `SpeedTestSocket` class whose callbacks report progress,
-completion and errors. RouterManager hooks into these events to update the UI and display the measured download speed.
-
-The library is released under the Apache 2.0 license.
+6. Use the **Off** button to reset the saved address and re-trigger detection.
 
 ---
 
@@ -160,7 +147,6 @@ No personal data is collected or transmitted.
 
 This project is licensed under the [Personal Use License](LICENSE).
 You are free to use and modify the code for non-commercial purposes with proper attribution.
-The included `speed-test-lib` dependency is licensed under Apache 2.0.
 
 ---
 
