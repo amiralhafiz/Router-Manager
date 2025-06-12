@@ -14,9 +14,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.routermanager.BuildConfig
 import com.example.routermanager.SpeedTester
 import kotlinx.coroutines.delay
 import org.junit.Rule
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -25,10 +27,13 @@ class SpeedTestActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(SpeedTestActivity::class.java)
 
+    private lateinit var fakeTester: FakeSpeedTester
+
     @org.junit.Before
     fun setUp() {
+        fakeTester = FakeSpeedTester()
         activityRule.scenario.onActivity { activity ->
-            activity.tester = FakeSpeedTester()
+            activity.tester = fakeTester
         }
     }
 
@@ -122,15 +127,34 @@ class SpeedTestActivityTest {
         onView(withId(R.id.downloadText))
             .check(matches(withText(R.string.speed_test_failed)))
     }
+
+    @Test
+    fun usesConfiguredTestUrl() {
+        onView(withId(R.id.runTestButton)).perform(click())
+
+        val hideResource = ProgressVisibilityIdlingResource(
+            activityRule.scenario,
+            R.id.loadingProgress,
+            View.GONE
+        )
+        IdlingRegistry.getInstance().register(hideResource)
+        onView(withId(R.id.loadingProgress))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+        IdlingRegistry.getInstance().unregister(hideResource)
+
+        assertEquals(BuildConfig.TEST_FILE_URL, fakeTester.lastUrl)
+    }
 }
 
 private class FakeSpeedTester(
     private val shouldFail: Boolean = false
 ) : SpeedTester {
+    var lastUrl: String? = null
     override suspend fun downloadSpeed(
         url: String,
         onProgress: (Int) -> Unit,
     ): Double {
+        lastUrl = url
         delay(100)
         onProgress(50)
         delay(100)
