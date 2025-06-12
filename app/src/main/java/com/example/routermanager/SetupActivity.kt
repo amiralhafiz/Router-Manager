@@ -12,6 +12,7 @@ import android.net.wifi.WifiManager
 import android.net.ConnectivityManager
 import android.os.Build
 import java.net.InetAddress
+import java.net.Inet4Address
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,7 +54,7 @@ class SetupActivity : AppCompatActivity() {
                     val network = connectivity?.activeNetwork
                     connectivity?.getLinkProperties(network)
                         ?.routes
-                        ?.firstOrNull { it.isDefaultRoute }
+                        ?.firstOrNull { it.isDefaultRoute && it.gateway is Inet4Address }
                         ?.gateway
                         ?.hostAddress
                 } else {
