@@ -5,25 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <WebView
-        android:id="@+id/speedTestWebView"
+    <ProgressBar
+        android:id="@+id/loadingProgress"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:max="100"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/loadingProgress"
-        style="?android:attr/progressBarStyleLarge"
+    <TextView
+        android:id="@+id/downloadText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:indeterminate="true"
-        android:contentDescription="@string/loading"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/download_speed_format"
+        app:layout_constraintTop_toBottomOf="@id/loadingProgress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -49,11 +47,11 @@
             app:srcCompat="@android:drawable/ic_menu_revert" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/refreshButton"
+            android:id="@+id/runTestButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:contentDescription="@string/action_refresh"
+            android:contentDescription="@string/action_run_test"
             app:srcCompat="@drawable/ic_refresh" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -74,4 +72,5 @@
         app:srcCompat="@android:drawable/ic_menu_more"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
