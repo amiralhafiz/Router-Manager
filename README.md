@@ -4,7 +4,7 @@
 
 ---
 
-[![Sponsor](https://img.shields.io/badge/Sponsor-%F0%9F%92%96-ff69b4?logo=github&style=for-the-badge)](https://github.com/sponsors/amiralhafiz)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/amiralhafiz?style=for-the-badge)](https://github.com/sponsors/amiralhafiz)
 
 ---
 
