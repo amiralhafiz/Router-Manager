@@ -4,6 +4,10 @@
 
 ---
 
+[![Sponsor](https://img.shields.io/badge/Sponsor-%F0%9F%92%96-ff69b4?logo=github&style=for-the-badge)](https://github.com/sponsors/amiralhafiz)
+
+---
+
 ## 🧠 AI-Built: Powered by ChatGPT Codex
 
 This project was built with approximately **80% of the code written using ChatGPT Codex**. More than just a code assistant, the AI acted as a **coding collaborator and QA engine**, helping validate architecture, fix issues in real time, and streamline repetitive development tasks.
