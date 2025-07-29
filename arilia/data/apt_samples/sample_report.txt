@@ -1,1 +1,0 @@
-Sample APT threat report text about PowerShell usage with PlugX in telecom sector.
