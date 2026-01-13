@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Router Manager</string>
+    <string name="router_image_description">Icono del router</string>
+    <string name="action_refresh">Actualizar</string>
+    <string name="action_speed_test">Prueba de velocidad</string>
+    <string name="action_access">Acceder</string>
+    <string name="action_back">Atrás</string>
+    <string name="action_power_off">Apagar</string>
+    <string name="action_expand">Expandir</string>
+    <string name="action_collapse">Contraer</string>
+    <string name="ssl_certificate_error_title">Error de certificado SSL</string>
+    <string name="ssl_certificate_error_message">El router presentó un certificado no confiable. ¿Continuar de todas formas?</string>
+    <string name="action_continue">Continuar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="page_load_error_title">Error de carga de página</string>
+    <string name="page_load_error_message">No se pudo cargar la página del router. Verifique la dirección e intente de nuevo.</string>
+    <string name="action_back_to_setup">Volver a configuración</string>
+    <string name="hint_router_url">URL del router</string>
+    <string name="version_format">Versión %1$s</string>
+    <string name="loading">Cargando...</string>
+</resources>

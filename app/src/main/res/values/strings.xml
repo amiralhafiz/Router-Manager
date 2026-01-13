@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Router Manager</string>
+    <string name="router_image_description">Router icon</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_speed_test">Speed Test</string>
+    <string name="action_access">Access</string>
+    <string name="action_back">Back</string>
+    <string name="action_power_off">Power Off</string>
+    <string name="action_expand">Expand</string>
+    <string name="action_collapse">Collapse</string>
+    <string name="ssl_certificate_error_title">SSL Certificate Error</string>
+    <string name="ssl_certificate_error_message">The router presented an untrusted certificate. Continue anyway?</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="page_load_error_title">Page Load Error</string>
+    <string name="page_load_error_message">Unable to load the router page. Please check the address and try again.</string>
+    <string name="action_back_to_setup">Back to Setup</string>
+    <string name="hint_router_url">Router URL</string>
+    <string name="version_format">Version %1$s</string>
+    <string name="loading">Loading...</string>
+</resources>
